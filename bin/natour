@@ -1,0 +1,111 @@
+#!/usr/bin/env ruby
+
+require 'word_wrap'
+require 'pathname'
+require 'optparse'
+require 'natour'
+
+config = Natour::Config.load_file(
+  Pathname($PROGRAM_NAME).basename.sub_ext('.yml'),
+  default: {
+    'out-dir' => nil,
+    'out-file' => nil,
+    'overwrite' => false,
+    'track-formats' => %i[gpx fit],
+    'map' => true,
+    'map-layers' => [],
+    'adoc-author' => nil,
+    'backend' => 'pdf',
+    'draft' => false,
+    'image-maxdim' => 1800
+  }
+)
+
+option_parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{Pathname($PROGRAM_NAME).basename('.*')} [OPTIONS]... PATH"
+  opts.separator('')
+  opts.separator(WordWrap.ww(
+    'If PATH refers to a directory, one or more reports are created in ' \
+    'AsciiDoc format. GPS tracks, images and species lists (Kosmos ' \
+    'Vogelführer, Flora Helvetica, Info Flora Online-Feldbuch) are ' \
+    'included. Images of the map section covered by the GPS tracks are also ' \
+    'created and included. If PATH refers to an AsciiDoc file, it is ' \
+    'converted to PDF (or any other supported format).'
+  ))
+  opts.separator('')
+  opts.separator('General:')
+  opts.on('-h', '--help', 'Display this help screen') do
+    $stdout.puts(opts)
+    exit
+  end
+  opts.on('-d', '--out-dir DIR', 'Output directory') do |value|
+    config['out-dir'] = value
+  end
+  opts.on('-f', '--out-file FILE', 'Output filename') do |value|
+    config['out-file'] = value
+  end
+  opts.on('--[no-]overwrite', 'Overwrite existing files') do |value|
+    config['overwrite'] = value
+  end
+  opts.separator('')
+  opts.separator('Creation:')
+  opts.on('--track-formats FORMATS', Array, 'GPS track formats (gpx, fit') do |value|
+    config['track-formats'] = value.map(&:to_sym)
+  end
+  opts.on('--[no-]map', 'Create map images') do |value|
+    config['map'] = value
+  end
+  opts.on('--map-layers LAYERS', Array, 'Add additional layers to map images') do |value|
+    config['map-layers'] = value
+  end
+  opts.on('--adoc-author AUTHOR', 'AsciiDoc author (name <email>[; name2 <email2>...])') do |value|
+    config['adoc-author'] = value
+  end
+  opts.separator('')
+  opts.separator('Conversion:')
+  opts.on('-b', '--backend BACKEND', 'Conversion backend (pdf, html5 ...)') do |value|
+    config['backend'] = value
+  end
+  opts.on('--[no-]draft', 'Show additional information (e.g. image paths)') do |value|
+    config['draft'] = value
+  end
+  opts.on('--image-maxdim DIM', 'Shrink oversized images (PDF only)') do |value|
+    config['image-maxdim'] = value.to_i
+  end
+end
+
+begin
+  option_parser.parse!
+rescue OptionParser::InvalidArgument,
+       OptionParser::InvalidOption => e
+  abort("Error: #{e}")
+end
+
+abort('Error: wrong number of arguments') if ARGV.length != 1
+
+path = Pathname(ARGV[0].encode('utf-8')
+                       .delete_suffix('"')
+                       .gsub('\\', '/'))
+
+if path.directory?
+  Natour.create(
+    path,
+    out_dir: config['out-dir'],
+    out_file: config['out-file'],
+    overwrite: config['overwrite'],
+    track_formats: config['track-formats'],
+    create_map: config['map'],
+    map_layers: config['map-layers'],
+    adoc_author: config['adoc-author']
+  )
+else
+  Natour.convert(
+    path,
+    out_dir: config['out-dir'],
+    out_file: config['out-file'],
+    overwrite: config['overwrite'],
+    backend: config['backend'],
+    draft: config['draft'],
+    image_maxdim: config['image-maxdim']
+  )
+end
