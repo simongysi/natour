@@ -49,7 +49,7 @@ option_parser = OptionParser.new do |opts|
   end
   opts.separator('')
   opts.separator('Creation:')
-  opts.on('--track-formats FORMATS', Array, 'GPS track formats (gpx, fit') do |value|
+  opts.on('--track-formats FORMATS', Array, 'GPS track formats (gpx, fit)') do |value|
     config['track-formats'] = value.map(&:to_sym)
   end
   opts.on('--[no-]map', 'Create map images') do |value|
