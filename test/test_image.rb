@@ -36,4 +36,13 @@ class TestImage < Minitest::Test
     assert(image.portrait?)
     assert(!image.landscape?)
   end
+
+  def test_image_with_date_but_no_orientation
+    filename = "#{__dir__}/data/IMG_20201009_151300.jpg"
+    image = Image.new(filename)
+    assert_equal(filename, image.path)
+    assert_equal(Time.new(2020, 10, 9, 15, 13, 0), image.date_time)
+    assert(image.portrait?)
+    assert(!image.landscape?)
+  end
 end
