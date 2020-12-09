@@ -52,7 +52,7 @@ module Natour
       doc << '|==='
       doc << "|Datum      |#{gps_track&.date&.strftime('%d.%m.%Y')}"
       doc << "|Startzeit  |#{gps_track&.start_point&.time&.strftime('%H:%M')}"
-      doc << "|Dauer      |#{gps_track&.duration&.strftime('%thh%M')}"
+      doc << "|Dauer      |#{gps_track&.duration&.strftime('%th:%M h')}"
       doc << "|Strecke    |#{distance.call(gps_track)}"
       doc << "|Aufstieg   |#{ascent.call(gps_track)}"
       doc << "|Abstieg    |#{descent.call(gps_track)}"
