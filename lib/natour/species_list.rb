@@ -25,7 +25,7 @@ module Natour
                elsif block.unpack('CCC') == [0xef, 0xbb, 0xbf]
                  block[3..-1].force_encoding('utf-8')
                else
-                 block.force_encoding('utf-8')
+                 block
                end
 
       case header
