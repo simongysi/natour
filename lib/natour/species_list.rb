@@ -6,13 +6,15 @@ module Natour
     attr_reader :path
     attr_reader :date
     attr_reader :type
+    attr_reader :group
     attr_reader :title
     attr_reader :description
 
-    def initialize(path, date, type, title, description, items)
+    def initialize(path, date, type, group, title, description, items)
       @path = path
       @date = date
       @type = type
+      @group = group
       @title = title
       @description = description
       @items = items
@@ -34,7 +36,7 @@ module Natour
           date = DateParser.parse(Pathname(filename).basename).compact.first
           items = csv.map { |row| Species.new(row[1], row[0]) }
                      .sort_by(&:name_de).uniq
-          [SpeciesList.new(filename, date, :kosmos_vogelfuehrer, nil, nil, items)]
+          [SpeciesList.new(filename, date, :kosmos_vogelfuehrer, :birds, nil, nil, items)]
         end
       when /^Favoriten/
         CSV.open(filename, 'r:bom|utf-8', col_sep: ';', skip_blanks: true) do |csv|
@@ -51,6 +53,7 @@ module Natour
               filename,
               date,
               :flora_helvetica,
+              :plants,
               name&.gsub(/^(\d{4}-)?\d{2}-\d{2}( |_|-)?/, ''),
               description,
               items
@@ -63,7 +66,7 @@ module Natour
           items = csv.select { |row| row[0] }
                      .map { |row| Species.new(row[11][/^(([^ ]+ [^ ]+)(( aggr\.)|( subsp\. [^ ]+))?)/, 1], nil) }
                      .sort_by(&:name).uniq
-          [SpeciesList.new(filename, date, :info_flora, nil, nil, items)]
+          [SpeciesList.new(filename, date, :info_flora, :plants, nil, nil, items)]
         end
       else
         []

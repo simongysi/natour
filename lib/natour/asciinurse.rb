@@ -104,10 +104,9 @@ module Natour
         doc << ''
         species_lists.each.with_index(1) do |species_list, index|
           info = {
-            kosmos_vogelfuehrer: birds_info,
-            flora_helvetica: plants_info,
-            info_flora: plants_info
-          }[species_list.type]
+            birds: birds_info,
+            plants: plants_info
+          }[species_list.group]
           doc << "=== #{info.title}"
           doc << ''
           doc << '[cols="1,5,5",options=header]'
