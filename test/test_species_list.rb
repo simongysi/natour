@@ -6,6 +6,12 @@ class TestSpeciesList < Minitest::Test
   include Minitest
   include Natour
 
+  def test_load_file_unknown_format
+    filename = "#{__dir__}/data/2020-06-01 171703.gpx"
+    species_lists = SpeciesList.load_file(filename)
+    assert_equal(0, species_lists.count)
+  end
+
   def test_load_file_kosmos_vogelfuehrer
     filename = "#{__dir__}/data/kosmos_vogelfuehrer.csv"
     species_lists = SpeciesList.load_file(filename)

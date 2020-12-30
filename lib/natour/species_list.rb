@@ -65,6 +65,8 @@ module Natour
                      .sort_by(&:name).uniq
           [SpeciesList.new(filename, date, :info_flora, nil, nil, items)]
         end
+      else
+        []
       end
     end
 
