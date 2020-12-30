@@ -21,7 +21,7 @@ class TestSpeciesList < Minitest::Test
     assert_equal(filename, species_list.path)
     assert_nil(species_list.date)
     assert_equal(:kosmos_vogelfuehrer, species_list.type)
-    assert_nil(species_list.name)
+    assert_nil(species_list.title)
     assert_nil(species_list.description)
     assert_equal(4, species_list.count)
     assert_equal([
@@ -41,7 +41,7 @@ class TestSpeciesList < Minitest::Test
     assert_equal(filename, species_list.path)
     assert_nil(species_list.date)
     assert_equal(:flora_helvetica, species_list.type)
-    assert_nil(species_list.name)
+    assert_nil(species_list.title)
     assert_nil(species_list.description)
     assert_equal(3, species_list.count)
     assert_equal([
@@ -60,7 +60,7 @@ class TestSpeciesList < Minitest::Test
     assert_equal(filename, species_list.path)
     assert_equal(:flora_helvetica, species_list.type)
     assert_nil(species_list.date)
-    assert_equal('Favoriten', species_list.name)
+    assert_equal('Favoriten', species_list.title)
     assert_nil(species_list.description)
     assert_equal(3, species_list.count)
     assert_equal([
@@ -73,7 +73,7 @@ class TestSpeciesList < Minitest::Test
     assert_equal(filename, species_list2.path)
     assert_equal(:flora_helvetica, species_list2.type)
     assert_equal(Date.new(2020, 6, 27), species_list2.date)
-    assert_equal('Gräserkurs', species_list2.name)
+    assert_equal('Gräserkurs', species_list2.title)
     assert_equal('Vertiefung Poaceae', species_list2.description)
     assert_equal(3, species_list2.count)
     assert_equal([
@@ -86,7 +86,7 @@ class TestSpeciesList < Minitest::Test
     assert_equal(filename, species_list3.path)
     assert_equal(:flora_helvetica, species_list3.type)
     assert_equal(Date.new(2020, 6, 26), species_list3.date)
-    assert_equal('Gräserkurs', species_list3.name)
+    assert_equal('Gräserkurs', species_list3.title)
     assert_equal('Vertiefung Cyperaceae', species_list3.description)
     assert_equal(3, species_list3.count)
     assert_equal([
@@ -105,7 +105,7 @@ class TestSpeciesList < Minitest::Test
     assert_equal(filename, species_list.path)
     assert_nil(species_list.date)
     assert_equal(:info_flora, species_list.type)
-    assert_nil(species_list.name)
+    assert_nil(species_list.title)
     assert_nil(species_list.description)
     assert_equal(3, species_list.count)
     assert_equal([
@@ -124,7 +124,7 @@ class TestSpeciesList < Minitest::Test
     assert_equal(filename, species_list.path)
     assert_nil(species_list.date)
     assert_equal(:info_flora, species_list.type)
-    assert_nil(species_list.name)
+    assert_nil(species_list.title)
     assert_nil(species_list.description)
     assert_equal(5, species_list.count)
     assert_equal([

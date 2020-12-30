@@ -6,14 +6,14 @@ module Natour
     attr_reader :path
     attr_reader :date
     attr_reader :type
-    attr_reader :name
+    attr_reader :title
     attr_reader :description
 
-    def initialize(path, date, type, name, description, items)
+    def initialize(path, date, type, title, description, items)
       @path = path
       @date = date
       @type = type
-      @name = name
+      @title = title
       @description = description
       @items = items
     end
