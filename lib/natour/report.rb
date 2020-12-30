@@ -38,7 +38,7 @@ module Natour
                          .map { |filename| Image.new(filename.to_s) }
                          .sort_by { |image| [image.date_time ? 0 : 1, image.date_time, image.path] }
         species_lists =
-          Pathname.glob('**/*.csv', File::FNM_CASEFOLD)
+          Pathname.glob('**/*.{csv,kml}', File::FNM_CASEFOLD)
                   .map { |filename| SpeciesList.load_file(filename.to_s) }
                   .flatten
                   .sort_by { |species_list| [species_list.type, species_list.date ? 0 : 1, species_list.date] }

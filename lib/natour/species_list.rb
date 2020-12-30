@@ -1,4 +1,5 @@
 require 'csv'
+require 'nokogiri'
 require 'pathname'
 
 module Natour
@@ -21,7 +22,7 @@ module Natour
     end
 
     def self.load_file(filename)
-      block = IO.binread(filename, 32)
+      block = IO.binread(filename, 128)
       header = if block.unpack('CC') == [0xff, 0xfe]
                  block[2..-1].force_encoding('utf-16le').encode('utf-8')
                elsif block.unpack('CCC') == [0xef, 0xbb, 0xbf]
@@ -38,6 +39,16 @@ module Natour
                      .sort_by(&:name_de).uniq
           [SpeciesList.new(filename, date, :kosmos_vogelfuehrer, :birds, nil, nil, items)]
         end
+      when /^<\?xml.*?www\.ornitho\.ch/m
+        date = DateParser.parse(Pathname(filename).basename).compact.first
+        doc = Nokogiri.XML(File.read(filename, mode: 'r:utf-8'))
+        folder = doc.at('/xmlns:kml/xmlns:Document/xmlns:Folder/xmlns:Folder/xmlns:Folder')
+        name = folder.at('./xmlns:name').text
+        items = folder.xpath('./xmlns:Placemark/xmlns:description')
+                      .map(&:text)
+                      .map { |description| Species.new(*description.scan(/&gt;([^&(]+)&lt;/).flatten.reverse) }
+                      .sort_by(&:name_de).uniq
+        [SpeciesList.new(filename, date, :ornitho_ch, :birds, name, nil, items)]
       when /^Favoriten/
         CSV.open(filename, 'r:bom|utf-8', col_sep: ';', skip_blanks: true) do |csv|
           chunks = csv.reject { |row| row.count == 1 && row[0] != 'Favoriten' }

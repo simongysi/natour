@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+<Document>
+<name>https://www.ornitho.ch</name>
+<StyleMap id="map50">
+<Pair>
+<key>normal</key>
+<styleUrl>#map50n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map50h</styleUrl>
+</Pair>
+</StyleMap>
+<StyleMap id="map100">
+<Pair>
+<key>normal</key>
+<styleUrl>#map100n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map100h</styleUrl>
+</Pair>
+</StyleMap>
+<StyleMap id="map200">
+<Pair>
+<key>normal</key>
+<styleUrl>#map200n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map200h</styleUrl>
+</Pair>
+</StyleMap>
+<StyleMap id="map400">
+<Pair>
+<key>normal</key>
+<styleUrl>#map400n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map400h</styleUrl>
+</Pair>
+</StyleMap>
+<Style id="map50n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map50n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map50h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map50h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map100n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map100n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map100h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map100h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map200n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map200n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map200h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map200h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map400n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map400n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map400h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map400h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="http://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Folder>
+<name>export</name>
+<visibility>0</visibility>
+<open>1</open>
+<Folder>
+<name><![CDATA[Dienstag, 29. Dezember 2020]]></name>
+<open>1</open>
+<Folder>
+<name><![CDATA[Chatzenseen (inkl. Büsisee) / Regensdorf (ZH)]]></name>
+<open>1</open>
+<Placemark><name><![CDATA[3 Löffelenten]]></name>
+<description><![CDATA[Dienstag, 29. Dezember 2020<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Löffelente&lt;/b&gt; (&lt;i&gt;Spatula clypeata&lt;/i&gt;)<br/><br/><b>Ort</b> : <br/>Chatzenseen (inkl. Büsisee) / Regensdorf (ZH) - Schweiz [679579 / 254053]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>3 Ind.<br/>Höhe : 439<br/>ID ornitho.ch : <a href="http://www.ornitho.ch/index.php?m_id=54&id=21758667">21758667</a><br/><br/>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.488284,47.430141,439</coordinates>
+</Point>
+</Placemark><Placemark><name><![CDATA[1 Turmfalke]]></name>
+<description><![CDATA[Dienstag, 29. Dezember 2020<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Turmfalke&lt;/b&gt; (&lt;i&gt;Falco tinnunculus&lt;/i&gt;)<br/><br/><b>Ort</b> : <br/>Chatzenseen (inkl. Büsisee) / Regensdorf (ZH) - Schweiz [679579 / 254053]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>1 Ind.<br/>Höhe : 446<br/>ID ornitho.ch : <a href="http://www.ornitho.ch/index.php?m_id=54&id=21758673">21758673</a><br/><br/>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.489056,47.433757,446</coordinates>
+</Point>
+</Placemark><Placemark><name><![CDATA[1 Turmfalke]]></name>
+<description><![CDATA[Dienstag, 29. Dezember 2020<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Turmfalke&lt;/b&gt; (&lt;i&gt;Falco tinnunculus&lt;/i&gt;)<br/><br/><b>Ort</b> : <br/>Chatzenseen (inkl. Büsisee) / Regensdorf (ZH) - Schweiz [679579 / 254053]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>1 Ind.<br/>Höhe : 439<br/>ID ornitho.ch : <a href="http://www.ornitho.ch/index.php?m_id=54&id=21758689">21758689</a><br/><br/><br/><table border="0"><tr><td valign="middle" align="center"><a href="https://www.ornitho.ch/index.php?m_id=54&amp;mid=722654"><img  style="display:block; margin: 0 auto;" border="0" title="Turmfalke (Falco tinnunculus)" alt="Turmfalke (Falco tinnunculus)" src="https://cdnmedia3.biolovision.net/data.biolovision.net/2020-12/xsmall/32_1609250195354-29150111-5141.jpg" /></a></td></tr></table>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.500429,47.433639,439</coordinates>
+</Point>
+</Placemark><Placemark><name><![CDATA[2 Turmfalken]]></name>
+<description><![CDATA[Dienstag, 29. Dezember 2020<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Turmfalke&lt;/b&gt; (&lt;i&gt;Falco tinnunculus&lt;/i&gt;)<br/><br/><b>Ort</b> : <br/>Chatzenseen (inkl. Büsisee) / Regensdorf (ZH) - Schweiz [679579 / 254053]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>2 Ind.<br/>Höhe : 439<br/>ID ornitho.ch : <a href="http://www.ornitho.ch/index.php?m_id=54&id=21758685">21758685</a><br/><br/>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.498685,47.435936,439</coordinates>
+</Point>
+</Placemark><Placemark><name><![CDATA[1 Zaunkönig]]></name>
+<description><![CDATA[Dienstag, 29. Dezember 2020<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Zaunkönig&lt;/b&gt; (&lt;i&gt;Troglodytes troglodytes&lt;/i&gt;)<br/><br/><b>Ort</b> : <br/>Chatzenseen (inkl. Büsisee) / Regensdorf (ZH) - Schweiz [679579 / 254053]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>1 Ind.<br/>Höhe : 443<br/>ID ornitho.ch : <a href="http://www.ornitho.ch/index.php?m_id=54&id=21758680">21758680</a><br/><br/>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.490515,47.435179,443</coordinates>
+</Point>
+</Placemark></Folder>
+</Folder>
+</Folder>
+</Document></kml>

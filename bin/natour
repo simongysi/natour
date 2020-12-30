@@ -27,9 +27,9 @@ option_parser = OptionParser.new do |opts|
   opts.separator(WordWrap.ww(
     'If PATH refers to a directory, one or more reports are created in ' \
     'AsciiDoc format. GPS tracks, images and species lists (Kosmos ' \
-    'Vogelführer, Flora Helvetica, Info Flora Online-Feldbuch) are ' \
-    'included. Images of the map section covered by the GPS tracks are also ' \
-    'created and included. If PATH refers to an AsciiDoc file, it is ' \
+    'Vogelführer, ornitho.ch, Flora Helvetica, Info Flora Online-Feldbuch) ' \
+    'are included. Images of the map section covered by the GPS tracks are ' \
+    'also created and included. If PATH refers to an AsciiDoc file, it is ' \
     'converted to PDF (or any other supported format).'
   ))
   opts.separator('')
