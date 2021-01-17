@@ -1,0 +1,13 @@
+---
+extends: default
+footer:
+  recto:
+    left:
+      content: 'by natour'
+    right:
+      content: '{page-number}'
+  verso:
+    left:
+      content: $footer_recto_right_content
+    right:
+      content: $footer_recto_left_content

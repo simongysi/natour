@@ -13,7 +13,11 @@ module Natour
       filename,
       backend: backend,
       safe: :unsafe,
-      standalone: true
+      standalone: true,
+      attributes: {
+        'pdf-theme' => 'natour',
+        'pdf-themesdir' => "#{__dir__}/data/themes"
+      }
     )
 
     dir = Pathname(filename).dirname
