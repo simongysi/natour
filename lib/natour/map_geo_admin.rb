@@ -9,7 +9,7 @@ module Natour
   class MapGeoAdmin
     def initialize(port: 0)
       @doc_root = Dir.mktmpdir
-      FileUtils.cp_r("#{__dir__}/js", @doc_root)
+      FileUtils.cp_r("#{__dir__}/data/js", @doc_root)
       event = Concurrent::Event.new
       @server = WEBrick::HTTPServer.new(
         StartCallback: -> { event.set },
