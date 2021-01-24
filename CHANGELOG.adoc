@@ -6,6 +6,26 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+== 0.2.0 - 2021-01-24
+
+=== Added
+
+- Add this gem's name to the footer of the PDF output
+- Support species lists from https://www.ornitho.ch/[ornitho.ch^] (KML format only)
+- Classify species lists by taxonomic groups (i.e. `SpeciesList.group`)
+
+=== Changed
+
+- Change `SpeciesList.name` to `SpeciesList.title`
+- Return an empty array from `SpeciesList.load_file` if the format is unknown
+- Change the format of the start time in the AsciiDoc output from _12:30_ to _12:30 Uhr_
+- Change the format of the duration in the AsciiDoc output from _1h30_ to _1:30 h_
+
+=== Fixed
+
+- Get the date from images even if the orientation tag is missing
+- Fix typo in help message
+
 == 0.1.0 - 2020-12-04
 
 === Added
