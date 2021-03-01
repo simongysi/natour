@@ -16,7 +16,8 @@ module Natour
       standalone: true,
       attributes: {
         'pdf-theme' => 'natour',
-        'pdf-themesdir' => "#{__dir__}/data/themes"
+        'pdf-themesdir' => "#{__dir__}/data/themes",
+        'pdf-fontsdir' => "#{__dir__}/data/fonts"
       }
     )
 

@@ -1,5 +1,14 @@
 ---
 extends: default
+font:
+  catalog:
+    DejaVu Serif Condensed:
+      normal: dejavuserifcondensed-normal.ttf
+      italic: dejavuserifcondensed-italic.ttf
+      bold: dejavuserifcondensed-bold.ttf
+      bold_italic: dejavuserifcondensed-bold_italic.ttf
+base:
+  font-family: DejaVu Serif Condensed
 footer:
   recto:
     left:
