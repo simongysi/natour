@@ -8,6 +8,7 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Changed
 
+- Bump minimum required Ruby version to 2.5
 - Change font in PDF output to support ♀ and ♂ symbols
 
 == 0.2.0 - 2021-01-24
