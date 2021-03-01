@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('asciidoctor-pdf', '~> 1.5')
   spec.add_runtime_dependency('concurrent-ruby', '~> 1.1')
   spec.add_runtime_dependency('ferrum', '~> 0.9')
-  spec.add_runtime_dependency('fit4ruby', '~> 3.7')
+  spec.add_runtime_dependency('fit4ruby', '= 3.7')
   spec.add_runtime_dependency('nokogiri', '~> 1.10')
   spec.add_runtime_dependency('ruby-duration', '~> 3.2')
   spec.add_runtime_dependency('ruby-vips', '~> 2.0')
