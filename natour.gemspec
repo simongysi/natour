@@ -8,7 +8,9 @@ Gem::Specification.new do |spec|
   spec.summary     = "#{spec.name} provides an application and a library for reports on nature activities"
   spec.homepage    = 'https://rubygems.org/gems/natour'
   spec.license     = 'MIT'
-  spec.metadata    = { 'source_code_uri' => 'https://github.com/simongysi/natour' }
+  spec.metadata    = { 'bug_tracker_uri' => 'https://github.com/simongysi/natour/issues',
+                       'changelog_uri' => 'https://github.com/simongysi/natour/blob/main/CHANGELOG.adoc',
+                       'source_code_uri' => 'https://github.com/simongysi/natour' }
   spec.files       = ['README.adoc', 'CHANGELOG.adoc', 'LICENSE'] +
                      Pathname.glob('lib/**/*').reject(&:directory?).map(&:to_s)
   spec.executables = Pathname.glob('bin/**/*').reject(&:directory?).map(&:basename).map(&:to_s)
