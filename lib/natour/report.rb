@@ -47,6 +47,7 @@ module Natour
                      else
                        Pathname.glob("**/*.{#{track_formats.join(',')}}", File::FNM_CASEFOLD)
                                .map { |filename| GPSTrack.load_file(filename.to_s) }
+                               .sort_by { |gps_track| [gps_track.date, gps_track.path] }
                      end
 
         if create_map
