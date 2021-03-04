@@ -45,7 +45,7 @@ sudo apt install build-essential patch ruby-dev zlib1g-dev liblzma-dev
 +
 [source,shell]
 ----
-sudo apt install libvips42
+sudo apt install libvips
 ----
 
 . Install https://www.google.com/chrome/[Google Chrome-Webbroser^]
