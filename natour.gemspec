@@ -2,7 +2,7 @@ require 'pathname'
 
 Gem::Specification.new do |spec|
   spec.name        = 'natour'
-  spec.version     = '0.2.0'
+  spec.version     = '0.3.0'
   spec.author      = 'Simon Gysi'
   spec.email       = 'simon.gysi@gmail.com'
   spec.summary     = "#{spec.name} provides an application and a library for reports on nature activities"
