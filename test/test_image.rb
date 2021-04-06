@@ -15,7 +15,6 @@ class TestImage < Minitest::Test
     image = Image.new(filename)
     assert_equal(filename, image.path)
     assert_nil(image.date_time)
-    assert(!image.portrait?)
     assert(image.landscape?)
   end
 
@@ -24,7 +23,6 @@ class TestImage < Minitest::Test
     image = Image.new(filename)
     assert_equal(filename, image.path)
     assert_equal(Time.new(2020, 6, 26, 15, 35, 13), image.date_time)
-    assert(!image.portrait?)
     assert(image.landscape?)
   end
 
@@ -33,7 +31,6 @@ class TestImage < Minitest::Test
     image = Image.new(filename)
     assert_equal(filename, image.path)
     assert_equal(Time.new(2020, 6, 27, 12, 37, 26), image.date_time)
-    assert(image.portrait?)
     assert(!image.landscape?)
   end
 
@@ -42,7 +39,6 @@ class TestImage < Minitest::Test
     image = Image.new(filename)
     assert_equal(filename, image.path)
     assert_equal(Time.new(2020, 10, 9, 15, 13, 0), image.date_time)
-    assert(image.portrait?)
     assert(!image.landscape?)
   end
 end

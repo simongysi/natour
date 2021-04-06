@@ -10,6 +10,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 - Show date/time of images in draft output
 
+=== Changed
+
+- Remove redundant method `Image.portrait?`
+
 == 0.3.0 - 2021-03-07
 
 === Changed

@@ -77,10 +77,10 @@ module Natour
         doc << '== Bilder'
         doc << ''
         images.each do |image|
-          width = if image.portrait?
-                    '40%'
-                  else
+          width = if image.landscape?
                     '80%'
+                  else
+                    '40%'
                   end
           doc << '.Abbildung {counter:image}'
           doc << "image::#{Pathname(doc_root).join(image.path)}[width=#{width}]"
