@@ -29,7 +29,9 @@ module Natour
 
     if draft
       doc.find_by(context: :image).each do |node|
-        node.title = "#{node.title} [#{node.attr('target')}]"
+        target = node.attr('target')
+        image = Image.new(dir.join(target).to_s)
+        node.title = "#{node.title} [#{[target, image.date_time].compact.join('|')}]"
       end
     end
 

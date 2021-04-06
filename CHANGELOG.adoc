@@ -6,6 +6,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+=== Added
+
+- Show date/time of images in draft output
+
 == 0.3.0 - 2021-03-07
 
 === Changed
