@@ -1,7 +1,7 @@
 require 'timeliness'
 
 module Natour
-  module DateParser
+  module DateUtils
     module_function
 
     def parse(*args)

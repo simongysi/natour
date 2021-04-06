@@ -34,13 +34,13 @@ module Natour
       case header
       when /^Primary/
         CSV.open(filename, 'r:windows-1252:utf-8', headers: true, liberal_parsing: true) do |csv|
-          date = DateParser.parse(Pathname(filename).basename).compact.first
+          date = DateUtils.parse(Pathname(filename).basename).compact.first
           items = csv.map { |row| Species.new(row[1], row[0]) }
                      .sort_by(&:name_de).uniq
           [SpeciesList.new(filename, date, :kosmos_vogelfuehrer, :birds, nil, nil, items)]
         end
       when /^<\?xml.*?www\.ornitho\.ch/m
-        date = DateParser.parse(Pathname(filename).basename).compact.first
+        date = DateUtils.parse(Pathname(filename).basename).compact.first
         doc = Nokogiri.XML(File.read(filename, mode: 'r:utf-8'))
         folder = doc.at('/xmlns:kml/xmlns:Document/xmlns:Folder/xmlns:Folder/xmlns:Folder')
         name = folder.at('./xmlns:name').text
@@ -57,7 +57,7 @@ module Natour
                       .reject { |rows| rows.count == 1 }
           chunks.map do |rows|
             name, description = rows.shift
-            date = DateParser.parse(name, Pathname(filename).basename).compact.first
+            date = DateUtils.parse(name, Pathname(filename).basename).compact.first
             items = rows.map { |row| Species.new(row[1][/^(([^ ]+ [^ ]+)(( aggr\.)|( subsp\. [^ ]+))?)/, 1], row[2]) }
                         .sort_by(&:name).uniq
             SpeciesList.new(
@@ -73,7 +73,7 @@ module Natour
         end
       when /^obs_id/
         CSV.open(filename, 'r:bom|utf-16le:utf-8', col_sep: "\t", headers: true) do |csv|
-          date = DateParser.parse(Pathname(filename).basename).compact.first
+          date = DateUtils.parse(Pathname(filename).basename).compact.first
           items = csv.select { |row| row[0] }
                      .map { |row| Species.new(row[11][/^(([^ ]+ [^ ]+)(( aggr\.)|( subsp\. [^ ]+))?)/, 1], nil) }
                      .sort_by(&:name).uniq

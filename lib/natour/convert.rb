@@ -48,7 +48,7 @@ module Natour
           scale = image_maxdim / image.size.max.to_f
           image = image.resize(scale) if scale < 1.0
           new_target = tmp_dir.join("title_logo_image_#{Pathname(target).basename}").to_s
-          suppress_output { image.write_to_file(new_target) }
+          StdoutUtils.suppress_output { image.write_to_file(new_target) }
           doc.set_attr('title-logo-image', title_logo_image.gsub(target, new_target))
         end
 
@@ -60,7 +60,7 @@ module Natour
           scale = image_maxdim / image.size.max.to_f
           image = image.resize(scale) if scale < 1.0
           new_target = tmp_dir.join("image#{index}_#{Pathname(target).basename}").to_s
-          suppress_output { image.write_to_file(new_target) }
+          StdoutUtils.suppress_output { image.write_to_file(new_target) }
           node.set_attr('target', new_target)
         end
 

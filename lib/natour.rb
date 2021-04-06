@@ -1,5 +1,5 @@
-require 'natour/helpers/date_parser'
-require 'natour/helpers/suppress_output'
+require 'natour/utils/date_utils'
+require 'natour/utils/stdout_utils'
 require 'natour/convert'
 require 'natour/create'
 require 'natour/asciinurse'
