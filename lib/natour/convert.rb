@@ -30,7 +30,7 @@ module Natour
     if draft
       doc.find_by(context: :image).each do |node|
         target = node.attr('target')
-        image = Image.new(dir.join(target).to_s)
+        image = Image.load_file(dir.join(target).to_s)
         node.title = "#{node.title} [#{[target, image.date_time].compact.join('|')}]"
       end
     end
@@ -42,25 +42,17 @@ module Natour
         title_logo_image = doc.attr('title-logo-image')
         if title_logo_image
           target = title_logo_image[/^image:{1,2}(.*?)\[(.*?)\]$/, 1]
-          options = {}
-          options[:autorotate] = true if target =~ /\.jpe?g$/i
-          image = Vips::Image.new_from_file(dir.join(target).to_s, options)
-          scale = image_maxdim / image.size.max.to_f
-          image = image.resize(scale) if scale < 1.0
+          image = Image.load_file(dir.join(target).to_s).autorotate.shrink_to(image_maxdim)
           new_target = tmp_dir.join("title_logo_image_#{Pathname(target).basename}").to_s
-          StdoutUtils.suppress_output { image.write_to_file(new_target) }
+          image.save_as(new_target)
           doc.set_attr('title-logo-image', title_logo_image.gsub(target, new_target))
         end
 
         doc.find_by(context: :image).each.with_index do |node, index|
           target = node.attr('target')
-          options = {}
-          options[:autorotate] = true if target =~ /\.jpe?g$/i
-          image = Vips::Image.new_from_file(dir.join(target).to_s, options)
-          scale = image_maxdim / image.size.max.to_f
-          image = image.resize(scale) if scale < 1.0
+          image = Image.load_file(dir.join(target).to_s).autorotate.shrink_to(image_maxdim)
           new_target = tmp_dir.join("image#{index}_#{Pathname(target).basename}").to_s
-          StdoutUtils.suppress_output { image.write_to_file(new_target) }
+          image.save_as(new_target)
           node.set_attr('target', new_target)
         end
 

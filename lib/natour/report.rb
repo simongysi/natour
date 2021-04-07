@@ -35,7 +35,7 @@ module Natour
         title = Pathname.pwd.basename.to_s.encode('utf-8')
                         .gsub(/^\d{4}-\d{2}-\d{2}( |_|-)?/, '')
         images = Pathname.glob('**/*.{jpg,jpeg}', File::FNM_CASEFOLD)
-                         .map { |filename| Image.new(filename.to_s) }
+                         .map { |filename| Image.load_file(filename.to_s) }
                          .sort_by { |image| [image.date_time ? 0 : 1, image.date_time, image.path] }
         species_lists =
           Pathname.glob('**/*.{csv,kml}', File::FNM_CASEFOLD)
@@ -58,7 +58,7 @@ module Natour
                 gps_track.save_gpx(track, overwrite: true)
                 filename = Pathname(gps_track.path).sub_ext('.jpg')
                 map.save_image(filename, tracks: [track], layers: map_layers)
-                Image.new(filename.to_s)
+                Image.load_file(filename.to_s)
               end
             end
           end
