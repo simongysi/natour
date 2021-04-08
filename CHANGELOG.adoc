@@ -9,6 +9,7 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 === Added
 
 - Show date/time of images in draft output
+- Support preferred conversion backend for draft output
 
 === Changed
 
