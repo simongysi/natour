@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'minitest/autorun'
 
+require_relative 'test_botanical_name_utils'
 require_relative 'test_config'
 require_relative 'test_date_utils'
 require_relative 'test_gps_track'

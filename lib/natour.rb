@@ -1,3 +1,4 @@
+require 'natour/utils/botanical_name_utils'
 require 'natour/utils/date_utils'
 require 'natour/utils/stdout_utils'
 require 'natour/convert'

@@ -6,6 +6,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+=== Fixed
+
+- Consider botanical names with the authority name preceding the subspecies
+
 == 0.4.0 - 2021-05-02
 
 === Added

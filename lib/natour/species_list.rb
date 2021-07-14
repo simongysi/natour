@@ -58,7 +58,7 @@ module Natour
           chunks.map do |rows|
             name, description = rows.shift
             date = DateUtils.parse(name, Pathname(filename).basename).compact.first
-            items = rows.map { |row| Species.new(row[1][/^(([^ ]+ [^ ]+)(( aggr\.)|( subsp\. [^ ]+))?)/, 1], row[2]) }
+            items = rows.map { |row| Species.new(BotanicalNameUtils.parse(row[1]), row[2]) }
                         .sort_by(&:name).uniq
             SpeciesList.new(
               filename,
@@ -75,7 +75,7 @@ module Natour
         CSV.open(filename, 'r:bom|utf-16le:utf-8', col_sep: "\t", headers: true) do |csv|
           date = DateUtils.parse(Pathname(filename).basename).compact.first
           items = csv.select { |row| row[0] }
-                     .map { |row| Species.new(row[11][/^(([^ ]+ [^ ]+)(( aggr\.)|( subsp\. [^ ]+))?)/, 1], nil) }
+                     .map { |row| Species.new(BotanicalNameUtils.parse(row[11]), nil) }
                      .sort_by(&:name).uniq
           [SpeciesList.new(filename, date, :info_flora, :plants, nil, nil, items)]
         end
