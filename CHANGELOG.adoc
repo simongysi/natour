@@ -8,6 +8,7 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Fixed
 
+- Support species lists of Flora Helvetica exported from Favoriten
 - Consider botanical names with the authority name preceding the subspecies
 
 == 0.4.0 - 2021-05-02

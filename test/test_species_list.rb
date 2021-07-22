@@ -53,7 +53,27 @@ class TestSpeciesList < Minitest::Test
     ], species_list.to_a)
   end
 
-  def test_load_file_flora_helvetica
+  def test_load_file_flora_helvetica_favoriten
+    filename = "#{__dir__}/data/flora_helvetica_favoriten.csv"
+    species_lists = SpeciesList.load_file(filename)
+    assert_equal(1, species_lists.count)
+
+    species_list = species_lists.first
+    assert_equal(filename, species_list.path)
+    assert_nil(species_list.date)
+    assert_equal(:flora_helvetica, species_list.type)
+    assert_equal(:plants, species_list.group)
+    assert_equal('Favoriten', species_list.title)
+    assert_nil(species_list.description)
+    assert_equal(3, species_list.count)
+    assert_equal([
+      Species.new('Crepis aurea', 'Gold-Pippau'),
+      Species.new('Crepis biennis', 'Wiesen-Pippau'),
+      Species.new('Crepis capillaris', 'Kleinköpfiger Pippau')
+    ], species_list.to_a)
+  end
+
+  def test_load_file_flora_helvetica_sammlungen
     filename = "#{__dir__}/data/flora_helvetica_sammlungen.csv"
     species_lists = SpeciesList.load_file(filename)
     assert_equal(1, species_lists.count)
@@ -73,7 +93,7 @@ class TestSpeciesList < Minitest::Test
     ], species_list.to_a)
   end
 
-  def test_load_file_flora_helvetica_multi
+  def test_load_file_flora_helvetica_sammlungen_multi
     filename = "#{__dir__}/data/flora_helvetica_sammlungen_multi.csv"
     species_lists = SpeciesList.load_file(filename)
     assert_equal(3, species_lists.count)

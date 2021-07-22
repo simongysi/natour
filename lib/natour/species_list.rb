@@ -49,10 +49,10 @@ module Natour
                       .map { |description| Species.new(*description.scan(/&gt;([^&(]+)&lt;/).flatten.reverse) }
                       .sort_by(&:name_de).uniq
         [SpeciesList.new(filename, date, :ornitho_ch, :birds, name, nil, items)]
-      when /^Favoriten/
+      when /^(Favoriten|NUMMER_FLORA)/
         CSV.open(filename, 'r:bom|utf-8', col_sep: ';', skip_blanks: true) do |csv|
-          chunks = csv.reject { |row| row.count == 1 && row[0] != 'Favoriten' }
-                      .reject { |row| row.count == 4 && row[0] == 'NUMMER_FLORA' }
+          chunks = csv.reject { |row| row.count == 1 }
+                      .map { |row| row[0] == 'NUMMER_FLORA' ? ['Favoriten'] : row }
                       .slice_before { |row| row.count == 1 || row.count == 3 }
                       .reject { |rows| rows.count == 1 }
           chunks.map do |rows|
