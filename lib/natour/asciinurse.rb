@@ -33,6 +33,7 @@ module Natour
         doc << Date.today.strftime('%d.%m.%Y')
       end
       doc << ':figure-caption!:'
+      doc << ':table-caption!:'
       doc << ':pdf-page-mode: none'
       doc << ':title-page:'
       if title_image
@@ -114,6 +115,9 @@ module Natour
           doc << "=== #{info.title}"
           doc << ''
           group.each do |species_list|
+            caption = '.Tabelle {counter:species_lists}'
+            caption << ": #{species_list.description}" if species_list.description
+            doc << caption
             doc << '[cols="1,5,5",options=header]'
             doc << '|==='
             doc << "|Nr.|#{info.headers.join('|')}"
