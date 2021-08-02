@@ -88,35 +88,42 @@ module Natour
         end
       end
       unless species_lists.empty?
-        birds_info = OpenStruct.new(
-          title: 'Vogelarten',
-          headers: %w[Deutscher\ Name Wissenschaftlicher\ Name],
-          columns: %i[name_de name]
-        )
-        plants_info = OpenStruct.new(
-          title: 'Pflanzenarten',
-          headers: %w[Wissenschaftlicher\ Name Deutscher\ Name],
-          columns: %i[name name_de]
-        )
         doc << '<<<'
         doc << ''
         doc << '== Artenlisten'
         doc << ''
-        species_lists.each.with_index(1) do |species_list, index|
-          info = {
-            birds: birds_info,
-            plants: plants_info
-          }[species_list.group]
+        index = 1
+        groups = species_lists.group_by(&:group)
+        [
+          OpenStruct.new(
+            group: :plants,
+            title: 'Pflanzenarten',
+            headers: %w[Wissenschaftlicher\ Name Deutscher\ Name],
+            columns: %i[name name_de]
+          ),
+          OpenStruct.new(
+            group: :birds,
+            title: 'Vogelarten',
+            headers: %w[Deutscher\ Name Wissenschaftlicher\ Name],
+            columns: %i[name_de name]
+          )
+        ].each do |info|
+          group = groups.fetch(info.group, [])
+          next if group.empty?
+
           doc << "=== #{info.title}"
           doc << ''
-          doc << '[cols="1,5,5",options=header]'
-          doc << '|==='
-          doc << "|Nr.|#{info.headers.join('|')}"
-          species_list.each do |species|
-            doc << "|{counter:species_list#{index}}|#{info.columns.map { |method| species.send(method) }.join('|')}"
+          group.each do |species_list|
+            doc << '[cols="1,5,5",options=header]'
+            doc << '|==='
+            doc << "|Nr.|#{info.headers.join('|')}"
+            species_list.each do |species|
+              doc << "|{counter:species_list#{index}}|#{info.columns.map { |method| species.send(method) }.join('|')}"
+            end
+            doc << '|==='
+            doc << ''
+            index += 1
           end
-          doc << '|==='
-          doc << ''
         end
       end
       doc.join("\n")
