@@ -3,6 +3,7 @@ require 'pathname'
 require 'asciidoctor'
 require 'asciidoctor-pdf'
 require 'vips'
+require 'time'
 
 module Natour
   module_function
@@ -38,6 +39,25 @@ module Natour
         target = node.attr('target')
         image = Image.load_file(dir.join(target).to_s)
         node.title = "#{node.title} [#{[target, image.date_time].compact.join('|')}]"
+      end
+    end
+
+    %w[
+      revdate
+      docdate
+      doctime
+      docdatetime
+      localdate
+      localtime
+      localdatetime
+    ].each do |attr_name|
+      date_time = Time.parse(doc.attr(attr_name))
+      if attr_name.end_with?('datetime')
+        doc.set_attr(attr_name, date_time.strftime('%d.%m.%Y %H:%M:%S'))
+      elsif attr_name.end_with?('date')
+        doc.set_attr(attr_name, date_time.strftime('%d.%m.%Y'))
+      elsif attr_name.end_with?('time')
+        doc.set_attr(attr_name, date_time.strftime('%H:%M:%S'))
       end
     end
 
