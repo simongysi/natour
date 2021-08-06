@@ -8,6 +8,7 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Added
 
+- Reflect the date of the last update in the revision date
 - Add captions to species lists in the AsciiDoc output
 - Group species lists by taxonomic groups in the AsciiDoc output
 

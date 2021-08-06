@@ -30,7 +30,7 @@ module Natour
       doc << "= #{title}"
       if author
         doc << author
-        doc << Date.today.strftime('%d.%m.%Y')
+        doc << ':revdate: {docdate}'
       end
       doc << ':figure-caption!:'
       doc << ':table-caption!:'
