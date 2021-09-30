@@ -11,12 +11,9 @@ module Natour
     def initialize(path, image)
       @path = path
       @image = image
+      @landscape = image.width >= image.height
       orientation = get_field('exif-ifd0-Orientation')
-      @landscape = if orientation
-                     orientation[/^(\d) \(/, 1].to_i.between?(1, 4)
-                   else
-                     image.width >= image.height
-                   end
+      @landscape = !@landscape if orientation && orientation[/^(\d) \(/, 1].to_i.between?(5, 8)
       date_time = get_field('exif-ifd0-DateTime')
       @date_time = Timeliness.parse(date_time[/^(.*?) \(/, 1], format: 'yyyy:mm:dd hh:nn:ss') if date_time
     end

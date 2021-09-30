@@ -18,7 +18,7 @@ class TestImage < Minitest::Test
     assert(image.landscape?)
   end
 
-  def test_image_with_date_landscape
+  def test_image_with_date_and_orientation_landscape
     filename = "#{__dir__}/data/2020-06-26 Gräserkurs in Amden/Bilder/IMG_0001.JPG"
     image = Image.load_file(filename)
     assert_equal(filename, image.path)
@@ -26,11 +26,19 @@ class TestImage < Minitest::Test
     assert(image.landscape?)
   end
 
-  def test_image_with_date_portrait
+  def test_image_with_date_and_orientation_portrait
     filename = "#{__dir__}/data/2020-06-26 Gräserkurs in Amden/Bilder/IMG_0002.JPG"
     image = Image.load_file(filename)
     assert_equal(filename, image.path)
     assert_equal(Time.new(2020, 6, 27, 12, 37, 26), image.date_time)
+    assert(!image.landscape?)
+  end
+
+  def test_image_with_date_and_orientation_portrait_already_rotated
+    filename = "#{__dir__}/data/20210717_112530.jpg"
+    image = Image.load_file(filename)
+    assert_equal(filename, image.path)
+    assert_equal(Time.new(2021, 7, 17, 11, 25, 30), image.date_time)
     assert(!image.landscape?)
   end
 
