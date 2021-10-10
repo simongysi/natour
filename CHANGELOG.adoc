@@ -8,6 +8,7 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Fixed
 
+- Support GPX files containing only mandatory elements (i.e. no extensions)
 - Consider also the image dimensions to determine the orientation, even if the tag is present
 
 == 0.5.0 - 2021-08-16

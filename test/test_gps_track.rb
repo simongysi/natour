@@ -65,6 +65,26 @@ class TestGPSTrack < Minitest::Test
     )
   end
 
+  def test_load_gpx_file_with_only_mandatory_elements
+    filename = "#{__dir__}/data/2021-10-06 Chatzensee/chatzensee.gpx"
+    gps_track = GPSTrack.load_file(filename)
+    assert_instance_of(GPXFile, gps_track)
+    assert_equal(filename, gps_track.path)
+    assert_nil(gps_track.date)
+    assert_nil(gps_track.ascent)
+    assert_nil(gps_track.descent)
+    assert_nil(gps_track.distance)
+    assert_nil(gps_track.duration)
+    assert_equal(
+      GPSTrackPoint.new(47.42101500653027, 8.508810599496316, nil, nil),
+      gps_track.start_point
+    )
+    assert_equal(
+      GPSTrackPoint.new(47.420883370885264, 8.508753300742045, nil, nil),
+      gps_track.end_point
+    )
+  end
+
   def test_round_down
     gps_track = GPSTrack.new(
       'path/to/gps_track',

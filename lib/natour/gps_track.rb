@@ -71,10 +71,14 @@ module Natour
     end
 
     def round_duration(duration, hours: 0, minutes: 0, seconds: 0)
+      return unless duration
+
       Duration.new(round_multiple_of(duration.to_i, (hours * 60 + minutes) * 60 + seconds))
     end
 
     def round_time(time, hours: 0, minutes: 0, seconds: 0)
+      return unless time
+
       Time.at(round_multiple_of(time.to_i, (hours * 60 + minutes) * 60 + seconds))
     end
   end

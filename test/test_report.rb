@@ -125,4 +125,20 @@ class TestReport < Minitest::Test
     assert_equal('Niederschlag', report2.starting_point)
     assert_equal('Niederschlag', report2.arrival_point)
   end
+
+  def test_load_directory_with_gpx_file_with_only_mandatory_elements
+    dir = "#{__dir__}/data/2021-10-06 Chatzensee"
+    reports = Report.load_directory(dir, create_map: false)
+    assert_equal(1, reports.count)
+    report = reports.first
+    assert_equal(dir, report.path)
+    assert_equal('Chatzensee', report.title)
+    assert_equal([], report.images.map(&:path))
+    assert_equal([], report.species_lists.map(&:path))
+    assert_equal('chatzensee.gpx', report.gps_track.path)
+    assert_nil(report.gps_track.date)
+    assert_nil(report.map_image)
+    assert_equal('Zürich Affoltern', report.starting_point)
+    assert_equal('Zürich Affoltern', report.arrival_point)
+  end
 end
