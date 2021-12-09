@@ -1,6 +1,6 @@
 = natour
 
-This https://rubygems.org/[RubyGem^] provides an application and a library for reports on nature activities.
+This https://rubygems.org/gems/natour[RubyGem^] provides an application and a library for reports on nature activities.
 
 == Installation
 
