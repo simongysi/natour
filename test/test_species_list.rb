@@ -33,6 +33,27 @@ class TestSpeciesList < Minitest::Test
     ], species_list.to_a)
   end
 
+  def test_load_file_birdlife_vogelfuehrer
+    filename = "#{__dir__}/data/birdlife_vogelfuehrer.csv"
+    species_lists = SpeciesList.load_file(filename)
+    assert_equal(1, species_lists.count)
+
+    species_list = species_lists.first
+    assert_equal(filename, species_list.path)
+    assert_nil(species_list.date)
+    assert_equal(:birdlife_vogelfuehrer, species_list.type)
+    assert_equal(:birds, species_list.group)
+    assert_nil(species_list.title)
+    assert_nil(species_list.description)
+    assert_equal(4, species_list.count)
+    assert_equal([
+      Species.new('Garrulus glandarius', 'Eichelhäher'),
+      Species.new('Cygnus olor', 'Höckerschwan'),
+      Species.new('Aegithalos caudatus', 'Schwanzmeise'),
+      Species.new('Columba livia f. domestica', 'Straßentaube')
+    ], species_list.to_a)
+  end
+
   def test_load_file_ornitho_ch
     filename = "#{__dir__}/data/export_29122020_152036.kml"
     species_lists = SpeciesList.load_file(filename)

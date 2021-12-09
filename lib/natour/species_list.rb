@@ -39,6 +39,13 @@ module Natour
                      .sort_by(&:name_de).uniq
           [SpeciesList.new(filename, date, :kosmos_vogelfuehrer, :birds, nil, nil, items)]
         end
+      when /^Name/
+        CSV.open(filename, 'r:bom|utf-8', headers: true) do |csv|
+          date = DateUtils.parse(Pathname(filename).basename).compact.first
+          items = csv.map { |row| Species.new(row[1], row[0]) }
+                     .sort_by(&:name_de).uniq
+          [SpeciesList.new(filename, date, :birdlife_vogelfuehrer, :birds, nil, nil, items)]
+        end
       when /^<\?xml.*?www\.ornitho\.ch/m
         date = DateUtils.parse(Pathname(filename).basename).compact.first
         doc = Nokogiri.XML(File.read(filename, mode: 'r:utf-8'))
