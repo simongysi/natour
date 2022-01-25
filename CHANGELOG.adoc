@@ -12,6 +12,7 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Fixed
 
+- Add revision date to the AsciiDoc output regardless of the author
 - Prevent conversion from being aborted if a built-in date/time attribute is missing
 
 == 0.6.0 - 2021-11-20

@@ -28,10 +28,8 @@ module Natour
 
       doc = []
       doc << "= #{title}"
-      if author
-        doc << author
-        doc << ':revdate: {docdate}'
-      end
+      doc << author if author
+      doc << ':revdate: {docdate}'
       doc << ':figure-caption!:'
       doc << ':table-caption!:'
       doc << ':pdf-page-mode: none'
