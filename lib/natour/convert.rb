@@ -51,7 +51,10 @@ module Natour
       localtime
       localdatetime
     ].each do |attr_name|
-      date_time = Time.parse(doc.attr(attr_name))
+      attr_value = doc.attr(attr_name)
+      next unless attr_value
+
+      date_time = Time.parse(attr_value)
       if attr_name.end_with?('datetime')
         doc.set_attr(attr_name, date_time.strftime('%d.%m.%Y %H:%M:%S'))
       elsif attr_name.end_with?('date')
