@@ -33,6 +33,7 @@ module Natour
     out_file = Pathname(
       out_file || "#{doc.attr('docname')}#{doc.attr('outfilesuffix')}"
     )
+    filename = out_dir.join(out_file)
 
     if draft
       doc.find_by(context: :image).each do |node|
@@ -88,7 +89,7 @@ module Natour
         FileUtils.mkdir_p(out_dir)
         mode = File::WRONLY | File::CREAT | File::TRUNC | File::BINARY
         mode |= File::EXCL unless overwrite
-        File.open(out_dir.join(out_file), mode) do |file|
+        File.open(filename, mode) do |file|
           doc.write(doc.convert, file)
         end
       end
@@ -96,9 +97,11 @@ module Natour
       FileUtils.mkdir_p(out_dir)
       mode = File::WRONLY | File::CREAT | File::TRUNC
       mode |= File::EXCL unless overwrite
-      File.open(out_dir.join(out_file), mode) do |file|
+      File.open(filename, mode) do |file|
         doc.write(doc.convert, file)
       end
     end
+
+    filename.to_s
   end
 end

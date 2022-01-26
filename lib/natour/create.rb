@@ -8,13 +8,14 @@ module Natour
     reports = Report.load_directory(
       dir, track_formats: track_formats, create_map: create_map, map_layers: map_layers
     )
-    reports.each.with_index(1) do |report, index|
+    reports.map.with_index(1) do |report, index|
       filename = if index < 2
                    out_dir.join(out_file)
                  else
                    out_dir.join("#{out_file.basename('.*')} (#{index})#{out_file.extname}")
                  end
       report.save_adoc(filename, overwrite: overwrite, author: adoc_author)
+      filename.to_s
     end
   end
 end

@@ -10,6 +10,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 - Support species lists from Vogelführer Birdlife Schweiz
 
+=== Changed
+
+- Return the filenames from `create` and `convert`
+
 === Fixed
 
 - Add revision date to the AsciiDoc output regardless of the author
