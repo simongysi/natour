@@ -34,18 +34,22 @@ module Natour
         path = Pathname(dir)
         title = Pathname.pwd.basename.to_s.encode('utf-8')
                         .gsub(/^\d{4}-\d{2}-\d{2}( |_|-)?/, '')
-        images = Pathname.glob('**/*.{jpg,jpeg}', File::FNM_CASEFOLD)
+        images = Pathname.glob('**/*.{[j|J][p|P][g|G],[j|J][p|P][e|E][g|G]}')
                          .map { |filename| Image.load_file(filename.to_s) }
                          .sort_by { |image| [image.date_time ? 0 : 1, image.date_time, image.path] }
         species_lists =
-          Pathname.glob('**/*.{csv,kml}', File::FNM_CASEFOLD)
+          Pathname.glob('**/*.{[c|C][s|S][v|V],[k|K][m|M][l|L]}')
                   .map { |filename| SpeciesList.load_file(filename.to_s) }
                   .flatten
                   .sort_by { |species_list| [species_list.type, species_list.date ? 0 : 1, species_list.date] }
         gps_tracks = if track_formats.empty?
                        []
                      else
-                       Pathname.glob("**/*.{#{track_formats.join(',')}}", File::FNM_CASEFOLD)
+                       track_patterns = { gpx: '[g|G][p|P][x|X]', fit: '[f|F][i|I][t|T]' }
+                       track_pattern = track_formats.map { |track_format| track_patterns[track_format] }
+                                                    .compact
+                                                    .join(',')
+                       Pathname.glob("**/*.{#{track_pattern}}")
                                .map { |filename| GPSTrack.load_file(filename.to_s) }
                                .sort_by { |gps_track| [gps_track.date, gps_track.path] }
                      end
