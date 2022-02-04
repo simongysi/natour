@@ -14,6 +14,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 - Return the filenames from `create` and `convert`
 
+=== Removed
+
+- Drop support for Ruby 2.5
+
 === Fixed
 
 - Add revision date to the AsciiDoc output regardless of the author

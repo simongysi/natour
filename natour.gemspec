@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.files       = ['README.adoc', 'CHANGELOG.adoc', 'LICENSE'] +
                      Pathname.glob('lib/**/*').reject(&:directory?).map(&:to_s)
   spec.executables = Pathname.glob('bin/**/*').reject(&:directory?).map(&:basename).map(&:to_s)
-  spec.required_ruby_version = '>= 2.5'
+  spec.required_ruby_version = '>= 2.6'
   spec.add_runtime_dependency('asciidoctor', '~> 2.0')
   spec.add_runtime_dependency('asciidoctor-pdf', '~> 1.5')
   spec.add_runtime_dependency('concurrent-ruby', '~> 1.1')
