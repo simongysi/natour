@@ -24,9 +24,9 @@ module Natour
     def self.load_file(filename)
       block = IO.binread(filename, 128)
       header = if block.unpack('CC') == [0xff, 0xfe]
-                 block[2..-1].force_encoding('utf-16le').encode('utf-8')
+                 block[2..].force_encoding('utf-16le').encode('utf-8')
                elsif block.unpack('CCC') == [0xef, 0xbb, 0xbf]
-                 block[3..-1].force_encoding('utf-8')
+                 block[3..].force_encoding('utf-8')
                else
                  block
                end

@@ -97,13 +97,13 @@ module Natour
           OpenStruct.new(
             group: :plants,
             title: 'Pflanzenarten',
-            headers: %w[Wissenschaftlicher\ Name Deutscher\ Name],
+            headers: ['Wissenschaftlicher Name', 'Deutscher Name'],
             columns: %i[name name_de]
           ),
           OpenStruct.new(
             group: :birds,
             title: 'Vogelarten',
-            headers: %w[Deutscher\ Name Wissenschaftlicher\ Name],
+            headers: ['Deutscher Name', 'Wissenschaftlicher Name'],
             columns: %i[name_de name]
           )
         ].each do |info|
