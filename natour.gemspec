@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('ruby-vips', '~> 2.0')
   spec.add_runtime_dependency('timeliness', '~> 0.4')
   spec.add_runtime_dependency('word_wrap', '~> 1.0')
-  spec.add_development_dependency('rubocop', '~> 1.2')
+  spec.add_development_dependency('rubocop', '= 1.25')
 end
