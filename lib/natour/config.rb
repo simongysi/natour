@@ -7,7 +7,7 @@ module Natour
       dirs.map do |dir|
         YAML.safe_load(
           File.read(Pathname(dir).join(filename)),
-          [Symbol]
+          permitted_classes: [Symbol]
         )
       rescue Errno::ENOENT
         {}
