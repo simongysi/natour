@@ -10,86 +10,90 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Added
 
-- Add support for Ruby 3.0 and 3.1
-- Support species lists from Vogelführer Birdlife Schweiz
+- Add support for Ruby 3.0 and 3.1.
+- Support species lists from https://www.birdlife.ch/de/content/eine-neue-moderne-vogel-app-fuer-die-schweiz[Vogelführer Birdlife Schweiz^].
 
 === Changed
 
-- Return the filenames from `create` and `convert`
+- Return the filenames from `Natour::create` and `Natour::convert`.
 
 === Removed
 
-- Drop support for Ruby 2.5
+- Drop support for Ruby 2.5.
 
 === Fixed
 
-- Add revision date to the AsciiDoc output regardless of the author
-- Prevent conversion from being aborted if a built-in date/time attribute is missing
+- Add revision date to the AsciiDoc output regardless of the author.
+- Prevent conversion from being aborted if a built-in date/time attribute is missing.
 
 == 0.6.0 - 2021-11-20
 
 === Fixed
 
-- Support GPX files containing only mandatory elements (i.e. no extensions)
-- Consider also the image dimensions to determine the orientation, even if the tag is present
+- Support GPX files containing only mandatory elements (i.e. no extensions).
+- Consider also the image dimensions to determine the orientation, even if the tag is present.
 
 == 0.5.0 - 2021-08-16
 
 === Added
 
-- Reflect the date of the last update in the revision date
-- Add captions to species lists in the AsciiDoc output
-- Group species lists by taxonomic groups in the AsciiDoc output
+- Reflect the date of the last update in the revision date.
+- Add captions to species lists in the AsciiDoc output.
+- Group species lists by taxonomic groups in the AsciiDoc output.
 
 === Fixed
 
-- Support species lists of Flora Helvetica exported from Favoriten
-- Consider botanical names with the authority name preceding the subspecies
+- Support species lists of https://www.flora-helvetica.ch/[Flora Helvetica^] exported from _Favoriten_.
+- Consider botanical names with the authority name preceding the subspecies.
 
 == 0.4.0 - 2021-05-02
 
 === Added
 
-- Show date/time of images in draft output
-- Support preferred conversion backend for draft output
+- Show date/time of images in draft output.
+- Support preferred conversion backend for draft output.
 
-=== Changed
+=== Removed
 
-- Remove redundant method `Image.portrait?`
+- Remove redundant method `Natour::Image.portrait?`.
++
+IMPORTANT: This is a breaking change. Use `Natour::Image.landscape?` instead.
 
 == 0.3.0 - 2021-03-07
 
 === Changed
 
-- Sort the reports according to their GPS track
-- Bump minimum required Ruby version to 2.5
-- Change font in PDF output to support ♀ and ♂ symbols
+- Sort the reports according to their GPS track.
+- Bump minimum required Ruby version to 2.5.
+- Change font in PDF output to support ♀ and ♂ symbols.
 
 === Fixed
 
-- Make source code compatible with Ruby version 2.5
+- Make source code compatible with Ruby 2.5.
 
 == 0.2.0 - 2021-01-24
 
 === Added
 
-- Add this gem's name to the footer of the PDF output
-- Support species lists from https://www.ornitho.ch/[ornitho.ch^] (KML format only)
-- Classify species lists by taxonomic groups (i.e. `SpeciesList.group`)
+- Add this gem's name to the footer of the PDF output.
+- Support species lists from https://www.ornitho.ch/[ornitho.ch^] (KML format only).
+- Classify species lists by taxonomic groups (i.e. `Natour::SpeciesList.group`).
 
 === Changed
 
-- Change `SpeciesList.name` to `SpeciesList.title`
-- Return an empty array from `SpeciesList.load_file` if the format is unknown
-- Change the format of the start time in the AsciiDoc output from _12:30_ to _12:30 Uhr_
-- Change the format of the duration in the AsciiDoc output from _1h30_ to _1:30 h_
+- Rename `Natour::SpeciesList.name` to `Natour::SpeciesList.title`.
++
+IMPORTANT: This is a breaking change.
+- Return an empty array from `Natour::SpeciesList.load_file` if the format is unknown.
+- Change the format of the start time in the AsciiDoc output from _12:30_ to _12:30 Uhr_.
+- Change the format of the duration in the AsciiDoc output from _1h30_ to _1:30 h_.
 
 === Fixed
 
-- Get the date from images even if the orientation tag is missing
-- Fix typo in help message
+- Get the date from images even if the orientation tag is missing.
+- Fix typo in help message.
 
 == 0.1.0 - 2020-12-04
 
 === Added
-- First release
+- First release.
