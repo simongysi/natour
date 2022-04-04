@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'word_wrap'
-require 'pathname'
-require 'optparse'
 require 'natour'
+require 'optparse'
+require 'pathname'
+require 'word_wrap'
 
 config = Natour::Config.load_file(
   Pathname($PROGRAM_NAME).basename.sub_ext('.yml'),

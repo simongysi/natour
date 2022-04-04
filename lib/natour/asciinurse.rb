@@ -1,6 +1,6 @@
 require 'fileutils'
-require 'pathname'
 require 'ostruct'
+require 'pathname'
 
 module Natour
   module Asciinurse

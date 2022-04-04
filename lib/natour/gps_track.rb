@@ -1,6 +1,6 @@
+require 'duration'
 require 'fileutils'
 require 'pathname'
-require 'duration'
 require 'time'
 
 module Natour

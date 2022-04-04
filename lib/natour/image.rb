@@ -1,7 +1,7 @@
-require 'vips'
-require 'timeliness'
 require 'fileutils'
 require 'pathname'
+require 'timeliness'
+require 'vips'
 
 module Natour
   class Image

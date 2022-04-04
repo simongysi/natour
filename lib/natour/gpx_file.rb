@@ -1,5 +1,5 @@
-require 'nokogiri'
 require 'duration'
+require 'nokogiri'
 require 'timeliness'
 
 module Natour

@@ -1,9 +1,9 @@
-require 'fileutils'
-require 'pathname'
 require 'asciidoctor'
 require 'asciidoctor-pdf'
-require 'vips'
+require 'fileutils'
+require 'pathname'
 require 'time'
+require 'vips'
 
 module Natour
   module_function

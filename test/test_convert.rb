@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'minitest/autorun'
 require 'natour'
+require 'pathname'
 
 class TestConvert < Minitest::Test
   include Minitest

@@ -1,7 +1,7 @@
+require 'date'
+require 'duration'
 require 'fit4ruby'
 require 'nokogiri'
-require 'duration'
-require 'date'
 require 'time'
 
 module Natour

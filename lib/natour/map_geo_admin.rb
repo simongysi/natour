@@ -1,9 +1,9 @@
-require 'fileutils'
-require 'pathname'
-require 'webrick'
 require 'concurrent'
 require 'ferrum'
+require 'fileutils'
+require 'pathname'
 require 'uri'
+require 'webrick'
 
 module Natour
   class MapGeoAdmin
