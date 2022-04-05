@@ -120,7 +120,8 @@ module Natour
             doc << '|==='
             doc << "|Nr.|#{info.headers.join('|')}"
             species_list.each do |species|
-              doc << "|{counter:species_list#{index}}|#{info.columns.map { |method| species.send(method) }.join('|')}"
+              doc <<
+                "|{counter:species_list#{index}}|#{info.columns.map { |method| species.public_send(method) }.join('|')}"
             end
             doc << '|==='
             doc << ''
