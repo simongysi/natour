@@ -9,7 +9,7 @@ module Natour
   module_function
 
   def convert_report(filename, out_dir: nil, out_file: nil, overwrite: false,
-                     backend: 'pdf', draft: false, draft_backend: nil, image_maxdim: 16000)
+                     backend: :pdf, draft: false, draft_backend: nil, image_maxdim: 16000)
     backend = if draft
                 draft_backend || backend
               else
@@ -65,7 +65,7 @@ module Natour
       end
     end
 
-    if backend == 'pdf'
+    if backend == :pdf
       Dir.mktmpdir do |tmp_dir|
         tmp_dir = Pathname(tmp_dir)
 

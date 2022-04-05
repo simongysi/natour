@@ -8,6 +8,9 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Changed
 
+- Change `backend` and `draft_backend` arguments of `Natour::convert_report` to symbols.
++
+IMPORTANT: This is a breaking change. Adapt `backend` and `draft-backend` in the configuration file accordingly (i.e. add `!ruby/sym` to the value).
 - Rename `Natour::create` to `Natour::create_reports` and `Natour::convert` to `Natour::convert_report`.
 +
 IMPORTANT: This is a breaking change.

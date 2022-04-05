@@ -15,7 +15,7 @@ config = Natour::Config.load_file(
     'map' => true,
     'map-layers' => [],
     'adoc-author' => nil,
-    'backend' => 'pdf',
+    'backend' => :pdf,
     'draft' => false,
     'draft-backend' => nil,
     'image-maxdim' => 1800
@@ -66,13 +66,13 @@ option_parser = OptionParser.new do |opts|
   opts.separator('')
   opts.separator('Conversion:')
   opts.on('-b', '--backend BACKEND', 'Conversion backend (pdf, html5 ...)') do |value|
-    config['backend'] = value
+    config['backend'] = value.to_sym
   end
   opts.on('--[no-]draft', 'Show additional information (e.g. image paths)') do |value|
     config['draft'] = value
   end
   opts.on('--draft-backend BACKEND', 'Preferred conversion backend for draft (pdf, html5 ...)') do |value|
-    config['draft-backend'] = value
+    config['draft-backend'] = value.to_sym
   end
   opts.on('--image-maxdim DIM', 'Shrink oversized images (PDF only)') do |value|
     config['image-maxdim'] = value.to_i
