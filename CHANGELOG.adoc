@@ -6,6 +6,12 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+=== Changed
+
+- Rename `Natour::create` to `Natour::create_reports` and `Natour::convert` to `Natour::convert_report`.
++
+IMPORTANT: This is a breaking change.
+
 == 0.7.0 - 2022-02-14
 
 === Added

@@ -8,9 +8,9 @@ class TestCreate < Minitest::Test
   include Minitest
   include Natour
 
-  def test_create
+  def test_create_reports
     Dir.mktmpdir do |tmp_dir|
-      filenames = create(
+      filenames = create_reports(
         "#{__dir__}/data/2020-02-15 Flachsee",
         out_dir: tmp_dir,
         create_map: false

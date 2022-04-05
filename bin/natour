@@ -93,7 +93,7 @@ path = Pathname(ARGV[0].encode('utf-8')
                        .gsub('\\', '/'))
 
 if path.directory?
-  Natour.create(
+  Natour.create_reports(
     path,
     out_dir: config['out-dir'],
     out_file: config['out-file'],
@@ -104,7 +104,7 @@ if path.directory?
     adoc_author: config['adoc-author']
   )
 else
-  Natour.convert(
+  Natour.convert_report(
     path,
     out_dir: config['out-dir'],
     out_file: config['out-file'],

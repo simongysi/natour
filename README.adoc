@@ -112,14 +112,14 @@ The basic use is shown in the following example. For details, see the source cod
 ----
 require 'natour'
 
-Natour::create('path/to/dir')
+Natour::create_reports('path/to/dir')
 ----
 
 [source,ruby]
 ----
 require 'natour'
 
-Natour::convert('path/to/dir/report.adoc')
+Natour::convert_report('path/to/dir/report.adoc')
 ----
 
 === Testing

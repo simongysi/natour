@@ -3,8 +3,8 @@ require 'pathname'
 module Natour
   module_function
 
-  def create(dir, out_dir: nil, out_file: nil, overwrite: false,
-             track_formats: %i[gpx fit], create_map: true, map_layers: [], adoc_author: nil)
+  def create_reports(dir, out_dir: nil, out_file: nil, overwrite: false,
+                     track_formats: %i[gpx fit], create_map: true, map_layers: [], adoc_author: nil)
     out_dir = Pathname(out_dir || dir)
     out_file = Pathname(out_file || "#{Pathname(dir).realpath.basename}.adoc")
     reports = Report.load_directory(
