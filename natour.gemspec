@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.6'
   spec.add_runtime_dependency('asciidoctor', '~> 2.0')
   spec.add_runtime_dependency('asciidoctor-pdf', '~> 1.5')
+  spec.add_runtime_dependency('clamp', '~> 1.3')
   spec.add_runtime_dependency('concurrent-ruby', '~> 1.1')
   spec.add_runtime_dependency('ferrum', '~> 0.9')
   spec.add_runtime_dependency('fit4ruby', '~> 3.9')

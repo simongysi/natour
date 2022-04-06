@@ -78,12 +78,12 @@ Create reports in https://asciidoc.org/[AsciiDoc^] format from a directory with 
 
 [source,shell]
 ----
-natour "2022-02-26 Monte Caslano"
+natour report create "2022-02-26 Monte Caslano"
 ----
 
 [source,shell]
 ----
-natour "2022-02-26 Monte Caslano/2022-02-26 Monte Caslano.adoc"
+natour report convert "2022-02-26 Monte Caslano/2022-02-26 Monte Caslano.adoc"
 ----
 
 NOTE: Use `natour --help` to get more information.

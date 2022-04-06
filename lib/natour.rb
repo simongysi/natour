@@ -1,3 +1,4 @@
+require_relative 'natour/utils/boolean_utils'
 require_relative 'natour/utils/botanical_name_utils'
 require_relative 'natour/utils/date_utils'
 require_relative 'natour/utils/stdout_utils'

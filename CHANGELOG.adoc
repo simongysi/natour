@@ -8,6 +8,9 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Changed
 
+- Rework the command line interface. Use `natour --help` to get more information.
++
+IMPORTANT: This is a breaking change. Adapt the commands accordingly.
 - Change `backend` and `draft_backend` arguments of `Natour::convert_report` to symbols.
 +
 IMPORTANT: This is a breaking change. Adapt `backend` and `draft-backend` in the configuration file accordingly (i.e. add `!ruby/sym` to the value).

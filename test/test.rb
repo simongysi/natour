@@ -2,6 +2,7 @@
 
 require 'minitest/autorun'
 
+require_relative 'test_boolean_utils'
 require_relative 'test_botanical_name_utils'
 require_relative 'test_config'
 require_relative 'test_convert_report'

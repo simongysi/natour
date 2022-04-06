@@ -1,9 +1,77 @@
 #!/usr/bin/env ruby
 
+require 'clamp'
 require 'natour'
-require 'optparse'
 require 'pathname'
 require 'word_wrap'
+
+class NatourCmd < Clamp::Command
+  class ReportCmd < Clamp::Command
+    class CreateCmd < Clamp::Command
+      banner(WordWrap.ww(
+        'Create reports in AsciiDoc format from a directory. GPS tracks, images and species ' \
+        'lists (Kosmos Vogelführer, Vogelführer Birdlife Schweiz, ornitho.ch, Flora Helvetica, ' \
+        'Info Flora Online-Feldbuch) are included. Images of the map section covered by the GPS ' \
+        'tracks are also created and included.'
+      ))
+      option(%w[-d --out-dir], 'DIR', 'Output directory')
+      option(%w[-f --out-file], 'FILE', 'Output filename')
+      option(%W[--\[no-\]overwrite], :flag, 'Overwrite existing files')
+      option(%w[--track-formats], 'FORMATS', 'GPS track formats (gpx, fit)') { |s| s.split(',').map(&:to_sym) }
+      option(%W[--\[no-\]map], :flag, 'Create map images')
+      option(%w[--map-layers], 'LAYERS', 'Add additional layers to map images') { |s| s.split(',') }
+      option(%w[--adoc-author], 'AUTHOR', 'AsciiDoc author (name <email>[; name2 <email2>...])')
+      parameter('PATH', 'Path to directory')
+
+      def execute
+        config = context[:config]
+        Natour.create_reports(
+          path.encode('utf-8').delete_suffix('"').gsub('\\', '/'),
+          out_dir: out_dir || config['out-dir'],
+          out_file: out_file || config['out-file'],
+          overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config['overwrite']),
+          track_formats: track_formats || config['track-formats'],
+          create_map: Natour::BooleanUtils.to_boolean(map?, default_value: config['map']),
+          map_layers: map_layers || config['map-layers'],
+          adoc_author: adoc_author || config['adoc-author']
+        )
+      end
+    end
+
+    class ConvertCmd < Clamp::Command
+      banner(WordWrap.ww(
+        'Convert a report from AsciiDoc to PDF or HTML (or any other supported format).'
+      ))
+      option(%w[-d --out-dir], 'DIR', 'Output directory')
+      option(%w[-f --out-file], 'FILE', 'Output filename')
+      option(%W[--\[no-\]overwrite], :flag, 'Overwrite existing files')
+      option(%w[-b --backend], 'BACKEND', 'Conversion backend (pdf, html5 ...)', &:to_sym)
+      option(%W[--\[no-\]draft], :flag, 'Show additional information (e.g. image paths)')
+      option(%w[--draft-backend], 'BACKEND', 'Preferred conversion backend for draft (pdf, html5 ...)', &:to_sym)
+      option(%w[--image-maxdim], 'DIM', 'Shrink oversized images (PDF only)') { |s| Integer(s) }
+      parameter('PATH', 'Path to AsciiDoc file')
+
+      def execute
+        config = context[:config]
+        Natour.convert_report(
+          path.encode('utf-8').delete_suffix('"').gsub('\\', '/'),
+          out_dir: out_dir || config['out-dir'],
+          out_file: out_file || config['out-file'],
+          overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config['overwrite']),
+          backend: backend || config['backend'],
+          draft: Natour::BooleanUtils.to_boolean(draft?, default_value: config['draft']),
+          draft_backend: draft_backend || config['draft-backend'],
+          image_maxdim: image_maxdim || config['image-maxdim']
+        )
+      end
+    end
+
+    subcommand('create', 'Create AsciiDoc reports from directory', CreateCmd)
+    subcommand('convert', 'Convert AsciiDoc report to PDF or HTML', ConvertCmd)
+  end
+
+  subcommand('report', 'Create or convert reports', ReportCmd)
+end
 
 config = Natour::Config.load_file(
   Pathname($PROGRAM_NAME).basename.sub_ext('.yml'),
@@ -22,96 +90,8 @@ config = Natour::Config.load_file(
   }
 )
 
-option_parser = OptionParser.new do |opts|
-  opts.banner = "Usage: #{Pathname($PROGRAM_NAME).basename('.*')} [OPTIONS]... PATH"
-  opts.separator('')
-  opts.separator(WordWrap.ww(
-    'If PATH refers to a directory, one or more reports are created in ' \
-    'AsciiDoc format. GPS tracks, images and species lists (Kosmos ' \
-    'Vogelführer, Vogelführer Birdlife Schweiz, ornitho.ch, Flora Helvetica,' \
-    ' Info Flora Online-Feldbuch) are included. Images of the map section ' \
-    'covered by the GPS tracks are also created and included. If PATH refers' \
-    ' to an AsciiDoc file, it is converted to PDF (or any other supported ' \
-    'format).'
-  ))
-  opts.separator('')
-  opts.separator('General:')
-  opts.on('-h', '--help', 'Display this help screen') do
-    $stdout.puts(opts)
-    exit
-  end
-  opts.on('-d', '--out-dir DIR', 'Output directory') do |value|
-    config['out-dir'] = value
-  end
-  opts.on('-f', '--out-file FILE', 'Output filename') do |value|
-    config['out-file'] = value
-  end
-  opts.on('--[no-]overwrite', 'Overwrite existing files') do |value|
-    config['overwrite'] = value
-  end
-  opts.separator('')
-  opts.separator('Creation:')
-  opts.on('--track-formats FORMATS', Array, 'GPS track formats (gpx, fit)') do |value|
-    config['track-formats'] = value.map(&:to_sym)
-  end
-  opts.on('--[no-]map', 'Create map images') do |value|
-    config['map'] = value
-  end
-  opts.on('--map-layers LAYERS', Array, 'Add additional layers to map images') do |value|
-    config['map-layers'] = value
-  end
-  opts.on('--adoc-author AUTHOR', 'AsciiDoc author (name <email>[; name2 <email2>...])') do |value|
-    config['adoc-author'] = value
-  end
-  opts.separator('')
-  opts.separator('Conversion:')
-  opts.on('-b', '--backend BACKEND', 'Conversion backend (pdf, html5 ...)') do |value|
-    config['backend'] = value.to_sym
-  end
-  opts.on('--[no-]draft', 'Show additional information (e.g. image paths)') do |value|
-    config['draft'] = value
-  end
-  opts.on('--draft-backend BACKEND', 'Preferred conversion backend for draft (pdf, html5 ...)') do |value|
-    config['draft-backend'] = value.to_sym
-  end
-  opts.on('--image-maxdim DIM', 'Shrink oversized images (PDF only)') do |value|
-    config['image-maxdim'] = value.to_i
-  end
-end
-
-begin
-  option_parser.parse!
-rescue OptionParser::InvalidArgument,
-       OptionParser::InvalidOption => e
-  abort("Error: #{e}")
-end
-
-abort('Error: wrong number of arguments') if ARGV.length != 1
-
-path = Pathname(ARGV[0].encode('utf-8')
-                       .delete_suffix('"')
-                       .gsub('\\', '/'))
-
-if path.directory?
-  Natour.create_reports(
-    path,
-    out_dir: config['out-dir'],
-    out_file: config['out-file'],
-    overwrite: config['overwrite'],
-    track_formats: config['track-formats'],
-    create_map: config['map'],
-    map_layers: config['map-layers'],
-    adoc_author: config['adoc-author']
-  )
-else
-  Natour.convert_report(
-    path,
-    out_dir: config['out-dir'],
-    out_file: config['out-file'],
-    overwrite: config['overwrite'],
-    backend: config['backend'],
-    draft: config['draft'],
-    draft_backend: config['draft-backend'],
-    image_maxdim: config['image-maxdim']
-  )
-end
+NatourCmd.run(
+  Pathname($PROGRAM_NAME).basename,
+  ARGV,
+  { config: config }
+)
