@@ -1,8 +1,9 @@
 require 'pathname'
+require_relative 'lib/natour/version'
 
 Gem::Specification.new do |spec|
   spec.name        = 'natour'
-  spec.version     = '0.7.0'
+  spec.version     = Natour::VERSION
   spec.author      = 'Simon Gysi'
   spec.email       = 'simon.gysi@gmail.com'
   spec.summary     = "#{spec.name} provides an application and a library to document nature activities."

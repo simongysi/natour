@@ -77,6 +77,11 @@ class NatourCmd < Clamp::Command
   end
 
   subcommand('report', 'Create or convert reports', ReportCmd)
+
+  option(%w[-v --version], :flag, 'Display the version') do
+    $stdout.puts("#{invocation_path} #{Natour::VERSION}")
+    exit
+  end
 end
 
 config = Natour::Config.load_file(

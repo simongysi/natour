@@ -6,6 +6,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+=== Added
+
+- Add command line option to display the version of this gem.
+
 === Changed
 
 - Improve the error reporting on the command line interface in case of file errors.
