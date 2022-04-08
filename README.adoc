@@ -1,6 +1,6 @@
 = natour
 
-This https://rubygems.org/gems/natour[RubyGem^] provides an application and a library for reports on nature activities.
+This https://rubygems.org/gems/natour[RubyGem^] provides an application and a library to document nature activities.
 
 == Installation
 
@@ -58,14 +58,35 @@ sudo apt install ./google-chrome-stable_current_amd64.deb
 
 == Application
 
-[cols="1,4",options=header]
-|===
-|Command
-|Description
+Create reports in https://asciidoc.org/[AsciiDoc^] format from a directory with GPS tracks, images and species lists. After editing the AsciiDoc files (e.g. selecting the images and describing the adventure), they can be converted to various formats, including PDF and HTML. A typical directory structure and the necessary commands are shown in the following example.
 
-|`natour`
-|Create reports in https://asciidoc.org/[AsciiDoc^] format from a directory with GPS tracks, images and species lists. After editing the AsciiDoc files, they can be converted to various formats, including PDF and HTML. Use `natour --help` to get more information.
-|===
+....
+└─ 2022-02-26 Monte Caslano             < Root directory
+   ├─ Bilder                            < Directory containing images
+   │  ├─ IMG_7687.JPG
+   │  ├─ IMG_7688.JPG
+   │  ├─ ...
+   │  └─ IMG_7870.JPG
+   ├─ 2022-02-26 14.45.27.fit           < GPS track exported by GPS device
+   ├─ 2022-02-26 14.45.27.gpx           < GPS track exported by GPS device
+   ├─ 2022-02-26 14.45.27.jpg           < Image of the map section created
+   ├─ 2022-02-26 Monte Caslano.adoc     < Report in AsciiDoc format created
+   ├─ 2022-02-26 Monte Caslano.pdf      < Report converted from AsciiDoc to PDF
+   ├─ 2022-02-26MonteCaslano.csv        < Species list exported from Kosmos Vogelführer
+   └─ flora_helvetica_sammlungen.csv    < Species list exported from Flora Helvetica
+....
+
+[source,shell]
+----
+natour "2022-02-26 Monte Caslano"
+----
+
+[source,shell]
+----
+natour "2022-02-26 Monte Caslano/2022-02-26 Monte Caslano.adoc"
+----
+
+NOTE: Use `natour --help` to get more information.
 
 === Configuration
 
@@ -84,8 +105,6 @@ map-layers:
 ----
 
 == Library
-
-=== Basic Use
 
 The basic use is shown in the following example. For details, see the source code and the unit tests.
 

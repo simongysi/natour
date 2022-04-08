@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.version     = '0.7.0'
   spec.author      = 'Simon Gysi'
   spec.email       = 'simon.gysi@gmail.com'
-  spec.summary     = "#{spec.name} provides an application and a library for reports on nature activities"
+  spec.summary     = "#{spec.name} provides an application and a library to document nature activities."
   spec.homepage    = 'https://github.com/simongysi/natour'
   spec.license     = 'MIT'
   spec.metadata    = { 'bug_tracker_uri' => 'https://github.com/simongysi/natour/issues',
