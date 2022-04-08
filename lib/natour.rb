@@ -1,6 +1,7 @@
 require_relative 'natour/utils/boolean_utils'
 require_relative 'natour/utils/botanical_name_utils'
 require_relative 'natour/utils/date_utils'
+require_relative 'natour/utils/errno_utils'
 require_relative 'natour/utils/stdout_utils'
 require_relative 'natour/asciinurse'
 require_relative 'natour/config'

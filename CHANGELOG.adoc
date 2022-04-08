@@ -8,6 +8,7 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Changed
 
+- Improve the error reporting on the command line interface in case of file errors.
 - Rework the configuration; the structure and naming follows the command line interface and the keys are of type Ruby Symbol. For details, see the README file.
 +
 IMPORTANT: This is a breaking change. Adapt the configuration file accordingly.
