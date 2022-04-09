@@ -16,8 +16,13 @@ class TestConfig < Minitest::Test
       ]
     )
     assert_equal({
-      'out-dir' => '~/natour',
-      'adoc-author' => 'John Doe <john.doe@mail.org>'
+      report: {
+        create: {
+          out_dir: '~/natour',
+          adoc_author: 'John Doe <john.doe@mail.org>',
+          track_formats: %i[gpx]
+        }
+      }
     }, config)
   end
 
@@ -25,8 +30,13 @@ class TestConfig < Minitest::Test
     config = Config.load_file(
       'config.yml',
       default: {
-        'out-dir' => '~/Documents',
-        'out-file' => 'report.adoc'
+        report: {
+          create: {
+            out_dir: '~/Documents',
+            out_file: 'report.adoc',
+            track_formats: %i[gpx fit]
+          }
+        }
       },
       dirs: [
         "#{__dir__}/data/config/user",
@@ -34,13 +44,18 @@ class TestConfig < Minitest::Test
       ]
     )
     assert_equal({
-      'out-dir' => '~/natour',
-      'out-file' => 'report.adoc',
-      'adoc-author' => 'John Doe <john.doe@mail.org>'
+      report: {
+        create: {
+          out_dir: '~/natour',
+          out_file: 'report.adoc',
+          adoc_author: 'John Doe <john.doe@mail.org>',
+          track_formats: %i[gpx]
+        }
+      }
     }, config)
   end
 
-  def test_load_file_reverse_dirs
+  def test_load_file_priorities
     config = Config.load_file(
       'config.yml',
       dirs: [
@@ -49,8 +64,13 @@ class TestConfig < Minitest::Test
       ]
     )
     assert_equal({
-      'out-dir' => '~/natour',
-      'adoc-author' => 'Hans Muster <hans.muster@mail.org>'
+      report: {
+        create: {
+          out_dir: '~/natour',
+          adoc_author: 'Hans Muster <hans.muster@mail.org>',
+          track_formats: %i[fit]
+        }
+      }
     }, config)
   end
 

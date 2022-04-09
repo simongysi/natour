@@ -1,3 +1,7 @@
 ---
-out-dir: ~/natour
-adoc-author: Hans Muster <hans.muster@mail.org>
+:report:
+  :create:
+    :out_dir: ~/natour
+    :adoc_author: Hans Muster <hans.muster@mail.org>
+    :track_formats:
+      - :fit

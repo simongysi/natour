@@ -1,2 +1,6 @@
 ---
-adoc-author: John Doe <john.doe@mail.org>
+:report:
+  :create:
+    :adoc_author: John Doe <john.doe@mail.org>
+    :track_formats:
+      - :gpx

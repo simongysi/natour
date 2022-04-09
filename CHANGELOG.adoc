@@ -8,12 +8,15 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 === Changed
 
+- Rework the configuration; the structure and naming follows the command line interface and the keys are of type Ruby Symbol. For details, see the README file.
++
+IMPORTANT: This is a breaking change. Adapt the configuration file accordingly.
 - Rework the command line interface. Use `natour --help` to get more information.
 +
 IMPORTANT: This is a breaking change. Adapt the commands accordingly.
 - Change `backend` and `draft_backend` arguments of `Natour::convert_report` to symbols.
 +
-IMPORTANT: This is a breaking change. Adapt `backend` and `draft-backend` in the configuration file accordingly (i.e. add `!ruby/sym` to the value).
+IMPORTANT: This is a breaking change. Adapt the configuration file accordingly.
 - Rename `Natour::create` to `Natour::create_reports` and `Natour::convert` to `Natour::convert_report`.
 +
 IMPORTANT: This is a breaking change.

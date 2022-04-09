@@ -90,18 +90,44 @@ NOTE: Use `natour --help` to get more information.
 
 === Configuration
 
-The configuration is built by loading https://yaml.org/[YAML^] files in hierarchical order. The files must be named `natour.yml` and are loaded first from the home directory of the current user and then from the current working directory. The values of the previously loaded files are overwritten by the values of the files loaded later. The key-value pairs are stored internally in a Ruby Hash, where the keys correspond to the command line arguments without leading dashes and without `no-` prefix for boolean switches.
+The configuration is built by loading https://yaml.org/[YAML^] files in hierarchical order. The files must be named `natour.yml` and are loaded first from the home directory of the current user and then from the current working directory. The values of the previously loaded files are overwritten by the values of the files loaded later. The values are stored internally in nested, dictionary-like collections (Ruby `Hash`), where the structure follows to the command line interface. All keys are of type Ruby `Symbol` and correspond to the commands and options, with middle hyphens replaced by underscores, leading hyphens removed, and without the `no-` prefix for boolean switches. The following configuration file shows all entries and their default values.
+
+[source,yml]
+----
+---
+:report:
+  :create:
+    :out_dir: null
+    :out_file: null
+    :overwrite: false
+    :track_formats:
+      - :gpx
+      - :fit
+    :map: true
+    :map_layers: []
+    :adoc_author: null
+  :convert:
+    :out_dir: null
+    :out_file: null
+    :overwrite: false
+    :backend: :pdf
+    :draft: false
+    :draft_backend: null
+    :image_maxdim: 1800
+----
 
 How to restrict GPS tracks to the FIT format (see https://developer.garmin.com/fit/[FIT SDK^]) and add additional map layers (see https://api3.geo.admin.ch/api/faq/index.html#which-layers-are-available[API FAQ - GeoAdmin API 3.0 documentation^]) is shown in the example below.
 
 [source,yml]
 ----
 ---
-track-formats:
-  - !ruby/sym fit
-map-layers:
-  - ch.swisstopo.swisstlm3d-wanderwege
-  - ch.bav.haltestellen-oev
+:report:
+  :create:
+    :track_formats:
+      - :fit
+    :map_layers:
+      - ch.swisstopo.swisstlm3d-wanderwege
+      - ch.bav.haltestellen-oev
 ----
 
 == Library

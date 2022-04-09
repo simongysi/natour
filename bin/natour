@@ -24,16 +24,16 @@ class NatourCmd < Clamp::Command
       parameter('PATH', 'Path to directory')
 
       def execute
-        config = context[:config]
+        config = context[:config][:report][:create]
         Natour.create_reports(
           path.encode('utf-8').delete_suffix('"').gsub('\\', '/'),
-          out_dir: out_dir || config['out-dir'],
-          out_file: out_file || config['out-file'],
-          overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config['overwrite']),
-          track_formats: track_formats || config['track-formats'],
-          create_map: Natour::BooleanUtils.to_boolean(map?, default_value: config['map']),
-          map_layers: map_layers || config['map-layers'],
-          adoc_author: adoc_author || config['adoc-author']
+          out_dir: out_dir || config[:out_dir],
+          out_file: out_file || config[:out_file],
+          overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config[:overwrite]),
+          track_formats: track_formats || config[:track_formats],
+          create_map: Natour::BooleanUtils.to_boolean(map?, default_value: config[:map]),
+          map_layers: map_layers || config[:map_layers],
+          adoc_author: adoc_author || config[:adoc_author]
         )
       end
     end
@@ -52,16 +52,16 @@ class NatourCmd < Clamp::Command
       parameter('PATH', 'Path to AsciiDoc file')
 
       def execute
-        config = context[:config]
+        config = context[:config][:report][:convert]
         Natour.convert_report(
           path.encode('utf-8').delete_suffix('"').gsub('\\', '/'),
-          out_dir: out_dir || config['out-dir'],
-          out_file: out_file || config['out-file'],
-          overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config['overwrite']),
-          backend: backend || config['backend'],
-          draft: Natour::BooleanUtils.to_boolean(draft?, default_value: config['draft']),
-          draft_backend: draft_backend || config['draft-backend'],
-          image_maxdim: image_maxdim || config['image-maxdim']
+          out_dir: out_dir || config[:out_dir],
+          out_file: out_file || config[:out_file],
+          overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config[:overwrite]),
+          backend: backend || config[:backend],
+          draft: Natour::BooleanUtils.to_boolean(draft?, default_value: config[:draft]),
+          draft_backend: draft_backend || config[:draft_backend],
+          image_maxdim: image_maxdim || config[:image_maxdim]
         )
       end
     end
@@ -76,17 +76,26 @@ end
 config = Natour::Config.load_file(
   Pathname($PROGRAM_NAME).basename.sub_ext('.yml'),
   default: {
-    'out-dir' => nil,
-    'out-file' => nil,
-    'overwrite' => false,
-    'track-formats' => %i[gpx fit],
-    'map' => true,
-    'map-layers' => [],
-    'adoc-author' => nil,
-    'backend' => :pdf,
-    'draft' => false,
-    'draft-backend' => nil,
-    'image-maxdim' => 1800
+    report: {
+      create: {
+        out_dir: nil,
+        out_file: nil,
+        overwrite: false,
+        track_formats: %i[gpx fit],
+        map: true,
+        map_layers: [],
+        adoc_author: nil
+      },
+      convert: {
+        out_dir: nil,
+        out_file: nil,
+        overwrite: false,
+        backend: :pdf,
+        draft: false,
+        draft_backend: nil,
+        image_maxdim: 1800
+      }
+    }
   }
 )
 
