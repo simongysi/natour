@@ -18,6 +18,10 @@ IMPORTANT: This is a breaking change. Adapt `backend` and `draft-backend` in the
 +
 IMPORTANT: This is a breaking change.
 
+=== Fixed
+
+- Do not abort if the configuration file is empty.
+
 == 0.7.0 - 2022-02-14
 
 === Added

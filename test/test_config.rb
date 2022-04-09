@@ -73,4 +73,14 @@ class TestConfig < Minitest::Test
     )
     assert_equal({}, config)
   end
+
+  def test_empty_file
+    config = Config.load_file(
+      'empty_config.yml',
+      dirs: [
+        "#{__dir__}/data/config"
+      ]
+    )
+    assert_equal({}, config)
+  end
 end
