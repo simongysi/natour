@@ -24,6 +24,7 @@ IMPORTANT: This is a breaking change.
 
 === Fixed
 
+- Do not overwrite map images unless otherwise specified.
 - Do not abort if the configuration file is empty.
 
 == 0.7.0 - 2022-02-14

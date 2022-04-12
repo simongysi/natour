@@ -8,7 +8,7 @@ module Natour
     out_dir = Pathname(out_dir || dir)
     out_file = Pathname(out_file || "#{Pathname(dir).realpath.basename}.adoc")
     reports = Report.load_directory(
-      dir, track_formats: track_formats, create_map: create_map, map_layers: map_layers
+      dir, track_formats: track_formats, create_map: create_map, overwrite_map: overwrite, map_layers: map_layers
     )
     reports.map.with_index(1) do |report, index|
       filename = if index < 2

@@ -29,7 +29,7 @@ module Natour
       @arrival_point = arrival_point
     end
 
-    def self.load_directory(dir, track_formats: %i[gpx fit], create_map: true, map_layers: [])
+    def self.load_directory(dir, track_formats: %i[gpx fit], create_map: true, overwrite_map: false, map_layers: [])
       Dir.chdir(dir) do
         path = Pathname(dir)
         title = Pathname.pwd.basename.to_s.encode('utf-8')
@@ -61,7 +61,7 @@ module Natour
                 track = Pathname(tmp_dir).join(gps_track.path).sub_ext('.gpx')
                 gps_track.save_gpx(track, overwrite: true)
                 filename = Pathname(gps_track.path).sub_ext('.jpg')
-                map.save_image(filename, tracks: [track], layers: map_layers)
+                map.save_image(filename, overwrite: overwrite_map, tracks: [track], layers: map_layers)
                 Image.load_file(filename.to_s)
               end
             end

@@ -8,7 +8,7 @@ require 'webrick'
 module Natour
   class MapGeoAdmin
     def initialize(port: 0)
-      @doc_root = Dir.mktmpdir
+      @doc_root = Pathname(Dir.mktmpdir)
       FileUtils.cp_r("#{__dir__}/data/js", @doc_root)
       event = Concurrent::Event.new
       @server = WEBrick::HTTPServer.new(
@@ -36,9 +36,8 @@ module Natour
       FileUtils.remove_entry(@doc_root)
     end
 
-    def save_image(filename, tracks: [], layers: [], size: [1200, 900])
+    def save_image(filename, overwrite: false, tracks: [], layers: [], size: [1200, 900])
       FileUtils.cp(tracks, @doc_root)
-      FileUtils.mkdir_p(Pathname(filename).dirname)
       uri = URI("http://#{@server[:BindAddress]}:#{@server[:Port]}/map")
       uri.query = URI.encode_www_form(
         tracks: tracks.map { |track| Pathname(track).basename }.join(','),
@@ -46,11 +45,18 @@ module Natour
         size: size.map { |dim| dim.is_a?(String) ? dim : "#{dim}px" }.join(',')
       )
       @browser.goto(uri)
+      tmp_filename = @doc_root.join(Pathname(filename).basename)
       @browser.screenshot(
-        path: filename,
+        path: tmp_filename,
         quality: 100,
         selector: '.map'
       )
+      FileUtils.mkdir_p(Pathname(filename).dirname)
+      mode = File::WRONLY | File::CREAT | File::TRUNC | File::BINARY
+      mode |= File::EXCL unless overwrite
+      File.open(filename, mode) do |file|
+        file.write(File.read(tmp_filename, mode: 'rb'))
+      end
     end
 
     def self.open(*args)

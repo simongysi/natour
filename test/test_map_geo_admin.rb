@@ -60,4 +60,22 @@ class TestMapGeoAdmin < Minitest::Test
       end
     end
   end
+
+  def test_save_image_dont_overwrite
+    MapGeoAdmin.open do |map|
+      Dir.mktmpdir do |tmp_dir|
+        filename = Pathname(tmp_dir).join('2020-06-01 171703.jpg')
+        File.write(filename, 'Hello World')
+        assert_raises(Errno::EEXIST) do
+          map.save_image(
+            filename,
+            tracks: [
+              "#{__dir__}/data/2020-06-01 171703.gpx"
+            ]
+          )
+        end
+        assert_equal('Hello World', File.read(filename))
+      end
+    end
+  end
 end
