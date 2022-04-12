@@ -76,7 +76,45 @@ class NatourCmd < Clamp::Command
     subcommand('convert', 'Convert AsciiDoc report to PDF or HTML', ConvertCmd)
   end
 
+  class MapCmd < Clamp::Command
+    class CreateCmd < Clamp::Command
+      banner(WordWrap.ww(
+        'Create images of the map section covered by the GPS tracks. The GPS tracks must be in ' \
+        'GPX format and the images are saved in JPG or PNG format.'
+      ))
+      option(%w[-d --out-dir], 'DIR', 'Output directory')
+      option(%w[-f --out-file], 'FILE', 'Output filename')
+      option(%W[--\[no-\]overwrite], :flag, 'Overwrite existing files')
+      option(%w[--map-layers], 'LAYERS', 'Add additional layers to map images') { |s| s.split(',') }
+      option(%w[--image-size], 'WIDTH,HEIGHT', 'Image size') do |s|
+        s.split(',', 2).map { |v| Integer(v) }
+      end
+      parameter('PATH ...', 'Paths to GPS tracks', attribute_name: :paths)
+
+      def execute
+        config = context[:config][:map][:create]
+        Natour::MapGeoAdmin.open do |map|
+          filename = Pathname(out_dir || config[:out_dir] || Pathname(paths.first).dirname)
+                     .join(out_file || config[:out_file] || Pathname(paths.first).basename.sub_ext('.jpg'))
+          map.save_image(
+            filename,
+            overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config[:overwrite]),
+            tracks: paths,
+            layers: map_layers || config[:map_layers],
+            size: image_size || config[:image_size]
+          )
+        end
+      rescue Errno::EEXIST, Errno::ENOENT, Errno::EACCES => e
+        message, _, path = Natour::ErrnoUtils.split_message(e)
+        abort("ERROR: #{message} '#{path}'")
+      end
+    end
+
+    subcommand('create', 'Create map images from GPS tracks', CreateCmd)
+  end
+
   subcommand('report', 'Create or convert reports', ReportCmd)
+  subcommand('map', 'Create map images', MapCmd)
 
   option(%w[-v --version], :flag, 'Display the version') do
     $stdout.puts("#{invocation_path} #{Natour::VERSION}")
@@ -105,6 +143,15 @@ config = Natour::Config.load_file(
         draft: false,
         draft_backend: nil,
         image_maxdim: 1800
+      }
+    },
+    map: {
+      create: {
+        out_dir: nil,
+        out_file: nil,
+        overwrite: false,
+        map_layers: [],
+        image_size: [1200, 900]
       }
     }
   }
