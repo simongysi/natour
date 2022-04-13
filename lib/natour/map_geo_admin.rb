@@ -36,13 +36,13 @@ module Natour
       FileUtils.remove_entry(@doc_root)
     end
 
-    def save_image(filename, overwrite: false, tracks: [], layers: [], size: [1200, 900])
-      FileUtils.cp(tracks, @doc_root)
+    def save_image(filename, overwrite: false, gps_files: [], map_layers: [], image_size: [1200, 900])
+      FileUtils.cp(gps_files, @doc_root)
       uri = URI("http://#{@server[:BindAddress]}:#{@server[:Port]}/map")
       uri.query = URI.encode_www_form(
-        tracks: tracks.map { |track| Pathname(track).basename }.join(','),
-        layers: layers.join(','),
-        size: size.map { |dim| dim.is_a?(String) ? dim : "#{dim}px" }.join(',')
+        'gps-files': gps_files.map { |gps_file| Pathname(gps_file).basename }.join(','),
+        'map-layers': map_layers.join(','),
+        'map-size': image_size.map { |dim| dim.is_a?(String) ? dim : "#{dim}px" }.join(',')
       )
       @browser.goto(uri)
       tmp_filename = @doc_root.join(Pathname(filename).basename)
@@ -72,11 +72,11 @@ module Natour
       def do_GET(request, response) # rubocop:disable Naming/MethodName
         raise WEBrick::HTTPStatus::NotFound unless request.path == '/map'
 
-        tracks = request.query.fetch('tracks', '').split(',')
-        layers = request.query.fetch('layers', '').split(',')
+        files = request.query.fetch('gps-files', '').split(',')
+        layers = request.query.fetch('map-layers', '').split(',')
         layers.unshift('ch.swisstopo.pixelkarte-farbe')
 
-        width, height = request.query.fetch('size', '').split(',')
+        width, height = request.query.fetch('map-size', '').split(',')
         raise WEBrick::HTTPStatus::BadRequest unless width && height
 
         doc = []
@@ -96,12 +96,12 @@ module Natour
         doc << '    layers.forEach(function(layer) {'
         doc << '      map.addLayer(ga.layer.create(layer))'
         doc << '    })'
-        doc << "    var tracks = [#{tracks.map { |track| "\"#{track}\"" }.join(', ')}]"
-        doc << '    tracks = tracks.map(function(track) {'
+        doc << "    var files = [#{files.map { |file| "\"#{file}\"" }.join(', ')}]"
+        doc << '    var vectors = files.map(function(file) {'
         doc << '      return new ol.layer.Vector({'
         doc << '        source: new ol.source.Vector({'
         doc << '          format: new ol.format.GPX(),'
-        doc << '          url: track'
+        doc << '          url: file'
         doc << '        }),'
         doc << '        style: new ol.style.Style({'
         doc << '          stroke: new ol.style.Stroke({'
@@ -111,12 +111,12 @@ module Natour
         doc << '        })'
         doc << '      })'
         doc << '    })'
-        doc << '    tracks.forEach(function(track) {'
-        doc << '      map.addLayer(track)'
-        doc << '      track.getSource().on("change", function(evt) {'
+        doc << '    vectors.forEach(function(vector) {'
+        doc << '      map.addLayer(vector)'
+        doc << '      vector.getSource().on("change", function(evt) {'
         doc << '        var extent = ol.extent.createEmpty()'
-        doc << '        tracks.forEach(function(track) {'
-        doc << '          ol.extent.extend(extent, track.getSource().getExtent())'
+        doc << '        vectors.forEach(function(vector) {'
+        doc << '          ol.extent.extend(extent, vector.getSource().getExtent())'
         doc << '        })'
         doc << '        map.getView().fit(extent, map.getSize())'
         doc << '      })'

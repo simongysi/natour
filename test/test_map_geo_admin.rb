@@ -14,7 +14,7 @@ class TestMapGeoAdmin < Minitest::Test
         filename = Pathname(tmp_dir).join('2020-06-01 171703.jpg')
         map.save_image(
           filename,
-          tracks: [
+          gps_files: [
             "#{__dir__}/data/2020-06-01 171703.gpx"
           ]
         )
@@ -30,7 +30,7 @@ class TestMapGeoAdmin < Minitest::Test
         filename = Pathname(tmp_dir).join('2020-06-26 161735_2020-06-27 153130.jpg')
         map.save_image(
           filename,
-          tracks: [
+          gps_files: [
             "#{__dir__}/data/2020-06-26 Gräserkurs in Amden/2020-06-26 161735.gpx",
             "#{__dir__}/data/2020-06-26 Gräserkurs in Amden/2020-06-27 153130.gpx"
           ]
@@ -47,10 +47,10 @@ class TestMapGeoAdmin < Minitest::Test
         filename = Pathname(tmp_dir).join('2020-06-01 171703.jpg')
         map.save_image(
           filename,
-          tracks: [
+          gps_files: [
             "#{__dir__}/data/2020-06-01 171703.gpx"
           ],
-          layers: [
+          map_layers: [
             'ch.swisstopo.swisstlm3d-wanderwege',
             'ch.bav.haltestellen-oev'
           ]
@@ -69,7 +69,7 @@ class TestMapGeoAdmin < Minitest::Test
         assert_raises(Errno::EEXIST) do
           map.save_image(
             filename,
-            tracks: [
+            gps_files: [
               "#{__dir__}/data/2020-06-01 171703.gpx"
             ]
           )

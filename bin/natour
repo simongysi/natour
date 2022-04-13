@@ -99,9 +99,9 @@ class NatourCmd < Clamp::Command
           map.save_image(
             filename,
             overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config[:overwrite]),
-            tracks: paths,
-            layers: map_layers || config[:map_layers],
-            size: image_size || config[:image_size]
+            gps_files: paths,
+            map_layers: map_layers || config[:map_layers],
+            image_size: image_size || config[:image_size]
           )
         end
       rescue Errno::EEXIST, Errno::ENOENT, Errno::EACCES => e
