@@ -79,8 +79,9 @@ class NatourCmd < Clamp::Command
   class MapCmd < Clamp::Command
     class CreateCmd < Clamp::Command
       banner(WordWrap.ww(
-        'Create images of the map section covered by the GPS tracks. The GPS tracks must be in ' \
-        'GPX or KML format and the images are saved in JPG or PNG format.'
+        'Create images of the map section covered by the GPS files. The GPS files must be in GPX' \
+        ' or KML format and contain tracks, waypoints or routes. The images are saved in JPG or ' \
+        'PNG format.'
       ))
       option(%w[-d --out-dir], 'DIR', 'Output directory')
       option(%w[-f --out-file], 'FILE', 'Output filename')
@@ -89,7 +90,7 @@ class NatourCmd < Clamp::Command
       option(%w[--image-size], 'WIDTH,HEIGHT', 'Image size') do |s|
         s.split(',', 2).map { |v| Integer(v) }
       end
-      parameter('PATH ...', 'Paths to GPS tracks', attribute_name: :paths)
+      parameter('PATH ...', 'Paths to GPS files', attribute_name: :paths)
 
       def execute
         config = context[:config][:map][:create]
@@ -110,7 +111,7 @@ class NatourCmd < Clamp::Command
       end
     end
 
-    subcommand('create', 'Create map images from GPS tracks', CreateCmd)
+    subcommand('create', 'Create map images from GPS files', CreateCmd)
   end
 
   subcommand('report', 'Create or convert reports', ReportCmd)
