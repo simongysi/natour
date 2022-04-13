@@ -80,7 +80,7 @@ class NatourCmd < Clamp::Command
     class CreateCmd < Clamp::Command
       banner(WordWrap.ww(
         'Create images of the map section covered by the GPS tracks. The GPS tracks must be in ' \
-        'GPX format and the images are saved in JPG or PNG format.'
+        'GPX or KML format and the images are saved in JPG or PNG format.'
       ))
       option(%w[-d --out-dir], 'DIR', 'Output directory')
       option(%w[-f --out-file], 'FILE', 'Output filename')
