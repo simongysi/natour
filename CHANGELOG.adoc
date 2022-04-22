@@ -6,6 +6,8 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+== 0.8.0 - 2022-04-22
+
 === Added
 
 - Add command to create map images from GPS tracks, waypoints and routes.
