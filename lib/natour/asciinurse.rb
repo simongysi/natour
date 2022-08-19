@@ -97,14 +97,18 @@ module Natour
           OpenStruct.new(
             group: :plants,
             title: 'Pflanzenarten',
-            headers: ['Wissenschaftlicher Name', 'Deutscher Name'],
-            columns: %i[name name_de]
+            columns: [
+              OpenStruct.new(header: 'Wissenschaftlicher Name', accessor: :name),
+              OpenStruct.new(header: 'Deutscher Name', accessor: :name_de)
+            ]
           ),
           OpenStruct.new(
             group: :birds,
             title: 'Vogelarten',
-            headers: ['Deutscher Name', 'Wissenschaftlicher Name'],
-            columns: %i[name_de name]
+            columns: [
+              OpenStruct.new(header: 'Deutscher Name', accessor: :name_de),
+              OpenStruct.new(header: 'Wissenschaftlicher Name', accessor: :name)
+            ]
           )
         ].each do |info|
           group = groups.fetch(info.group, [])
@@ -115,13 +119,18 @@ module Natour
           group.each do |species_list|
             caption = '.Tabelle {counter:species_lists}'
             caption << ": #{species_list.description}" if species_list.description
+            columns = info.columns.select do |column|
+              species_list.any? { |species| !species.public_send(column.accessor).nil? }
+            end
+            cols = [1] + [5 * info.columns.size / columns.size] * columns.size
             doc << caption
-            doc << '[cols="1,5,5",options=header]'
+            doc << "[cols=\"#{cols.join(',')}\",options=header]"
             doc << '|==='
-            doc << "|Nr.|#{info.headers.join('|')}"
+            doc << "|Nr.|#{columns.map(&:header).join('|')}"
             species_list.each do |species|
               doc <<
-                "|{counter:species_list#{index}}|#{info.columns.map { |method| species.public_send(method) }.join('|')}"
+                "|{counter:species_list#{index}}|#{columns.map { |column| species.public_send(column.accessor) }
+                                                          .join('|')}"
             end
             doc << '|==='
             doc << ''

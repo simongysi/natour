@@ -6,6 +6,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+=== Changed
+
+- Omit empty columns of species lists in AsciiDoc output.
+
 == 0.8.0 - 2022-04-22
 
 === Added
