@@ -10,6 +10,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 - Omit empty columns of species lists in AsciiDoc output.
 
+=== Fixed
+
+- Fix the creation of map images.
+
 == 0.8.0 - 2022-04-22
 
 === Added

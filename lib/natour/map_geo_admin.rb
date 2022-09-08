@@ -4,6 +4,7 @@ require 'fileutils'
 require 'pathname'
 require 'uri'
 require 'webrick'
+require 'webrick/https'
 
 module Natour
   class MapGeoAdmin
@@ -11,21 +12,29 @@ module Natour
       @doc_root = Pathname(Dir.mktmpdir)
       FileUtils.cp_r("#{__dir__}/data/js", @doc_root)
       event = Concurrent::Event.new
-      @server = WEBrick::HTTPServer.new(
-        StartCallback: -> { event.set },
-        Logger: WEBrick::Log.new(File.open(File::NULL, 'w')),
-        AccessLog: [],
-        DocumentRoot: @doc_root,
-        BindAddress: 'localhost',
-        Port: port
-      )
+      @server = StdoutUtils.suppress_output do
+        WEBrick::HTTPServer.new(
+          StartCallback: -> { event.set },
+          Logger: WEBrick::Log.new(File.open(File::NULL, 'w')),
+          AccessLog: [],
+          DocumentRoot: @doc_root,
+          BindAddress: 'localhost',
+          Port: port,
+          SSLEnable: true,
+          SSLCertName: [%w[CN localhost]]
+        )
+      end
       @server.mount('/map', MapServlet)
       @thread = Thread.new { @server.start }
       event.wait
       @browser = Ferrum::Browser.new(
         slowmo: 2.0,
+        timout: 30,
         window_size: [5000, 5000],
-        browser_options: { 'no-sandbox': nil }
+        browser_options: {
+          'no-sandbox': nil,
+          'ignore-certificate-errors': nil
+        }
       )
     end
 
@@ -38,7 +47,7 @@ module Natour
 
     def save_image(filename, overwrite: false, gps_files: [], map_layers: [], image_size: [1200, 900])
       FileUtils.cp(gps_files, @doc_root)
-      uri = URI("http://#{@server[:BindAddress]}:#{@server[:Port]}/map")
+      uri = URI("https://#{@server[:BindAddress]}:#{@server[:Port]}/map")
       uri.query = URI.encode_www_form(
         'gps-files': gps_files.map { |gps_file| Pathname(gps_file).basename }.join(','),
         'map-layers': map_layers.join(','),
