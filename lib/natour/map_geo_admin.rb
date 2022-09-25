@@ -82,8 +82,8 @@ module Natour
         raise WEBrick::HTTPStatus::NotFound unless request.path == '/map'
 
         files = request.query.fetch('gps-files', '').split(',')
-        layers = request.query.fetch('map-layers', '').split(',')
-        layers.unshift('ch.swisstopo.pixelkarte-farbe')
+        layers = ['ch.swisstopo.pixelkarte-farbe']
+        layers |= request.query.fetch('map-layers', '').split(',')
 
         width, height = request.query.fetch('map-size', '').split(',')
         raise WEBrick::HTTPStatus::BadRequest unless width && height
