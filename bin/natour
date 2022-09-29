@@ -86,6 +86,7 @@ class NatourCmd < Clamp::Command
       option(%w[-d --out-dir], 'DIR', 'Output directory')
       option(%w[-f --out-file], 'FILE', 'Output filename')
       option(%W[--\[no-\]overwrite], :flag, 'Overwrite existing files')
+      option(%w[--gps-colors], 'COLORS', 'Colors for elements from GPS files') { |s| s.split(',') }
       option(%w[--map-layers], 'LAYERS', 'Add additional layers to map images') { |s| s.split(',') }
       option(%w[--image-size], 'WIDTH,HEIGHT', 'Image size') do |s|
         s.split(',', 2).map { |v| Integer(v) }
@@ -101,6 +102,7 @@ class NatourCmd < Clamp::Command
             filename,
             overwrite: Natour::BooleanUtils.to_boolean(overwrite?, default_value: config[:overwrite]),
             gps_files: paths,
+            gps_colors: gps_colors || config[:gps_colors],
             map_layers: map_layers || config[:map_layers],
             image_size: image_size || config[:image_size]
           )
@@ -151,6 +153,7 @@ config = Natour::Config.load_file(
         out_dir: nil,
         out_file: nil,
         overwrite: false,
+        gps_colors: [],
         map_layers: [],
         image_size: [1200, 900]
       }

@@ -119,6 +119,7 @@ The configuration is built by loading https://yaml.org/[YAML^] files in hierarch
     :out_dir: null
     :out_file: null
     :overwrite: false
+    :gps_colors: []
     :map_layers: []
     :image_size: [1200, 900]
 ----

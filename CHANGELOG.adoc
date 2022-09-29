@@ -6,6 +6,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+=== Added
+
+- Support colors for GPS tracks, waypoints and routes (`natour map create` command only).
+
 === Changed
 
 - Omit empty columns of species lists in AsciiDoc output.

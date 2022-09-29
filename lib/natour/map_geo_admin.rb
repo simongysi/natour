@@ -45,11 +45,12 @@ module Natour
       FileUtils.remove_entry(@doc_root)
     end
 
-    def save_image(filename, overwrite: false, gps_files: [], map_layers: [], image_size: [1200, 900])
+    def save_image(filename, overwrite: false, gps_files: [], gps_colors: [], map_layers: [], image_size: [1200, 900])
       FileUtils.cp(gps_files, @doc_root)
       uri = URI("https://#{@server[:BindAddress]}:#{@server[:Port]}/map")
       uri.query = URI.encode_www_form(
         'gps-files': gps_files.map { |gps_file| Pathname(gps_file).basename }.join(','),
+        'gps-colors': gps_colors.join(','),
         'map-layers': map_layers.join(','),
         'map-size': image_size.map { |dim| dim.is_a?(String) ? dim : "#{dim}px" }.join(',')
       )
@@ -82,6 +83,8 @@ module Natour
         raise WEBrick::HTTPStatus::NotFound unless request.path == '/map'
 
         files = request.query.fetch('gps-files', '').split(',')
+        colors = request.query.fetch('gps-colors', '').split(',')
+        (files.size - colors.size).times { colors << (colors.last || 'blueviolet') }
         layers = ['ch.swisstopo.pixelkarte-farbe']
         layers |= request.query.fetch('map-layers', '').split(',')
 
@@ -105,45 +108,48 @@ module Natour
         doc << '    layers.forEach(function(layer) {'
         doc << '      map.addLayer(ga.layer.create(layer))'
         doc << '    })'
-        doc << '    let styles = {'
-        doc << '      "Point": new ol.style.Style({'
-        doc << '        image: new ol.style.Circle({'
-        doc << '          fill: new ol.style.Fill({'
-        doc << '            color: function() {'
-        doc << '              let color = "blueviolet"'
-        doc << '              let [r, g, b, a] = ol.color.asArray(color)'
-        doc << '              a = 0.3'
-        doc << '              return ol.color.asString([r, g, b, a])'
-        doc << '            }()'
-        doc << '          }),'
-        doc << '          radius: 6,'
+        doc << '    let getStyles = function(color) {'
+        doc << '      return {'
+        doc << '        "Point": new ol.style.Style({'
+        doc << '          image: new ol.style.Circle({'
+        doc << '            fill: new ol.style.Fill({'
+        doc << '              color: function() {'
+        doc << '                let [r, g, b, a] = ol.color.asArray(color)'
+        doc << '                a = 0.3'
+        doc << '                return ol.color.asString([r, g, b, a])'
+        doc << '              }()'
+        doc << '            }),'
+        doc << '            radius: 6,'
+        doc << '            stroke: new ol.style.Stroke({'
+        doc << '              color: color,'
+        doc << '              width: 1.5'
+        doc << '            })'
+        doc << '          })'
+        doc << '        }),'
+        doc << '        "LineString": new ol.style.Style({'
         doc << '          stroke: new ol.style.Stroke({'
-        doc << '            color: "blueviolet",'
-        doc << '            width: 1.5'
+        doc << '            color: color,'
+        doc << '            width: 3'
+        doc << '          })'
+        doc << '        }),'
+        doc << '        "MultiLineString": new ol.style.Style({'
+        doc << '          stroke: new ol.style.Stroke({'
+        doc << '            color: color,'
+        doc << '            width: 3'
         doc << '          })'
         doc << '        })'
-        doc << '      }),'
-        doc << '      "LineString": new ol.style.Style({'
-        doc << '        stroke: new ol.style.Stroke({'
-        doc << '          color: "blueviolet",'
-        doc << '          width: 3'
-        doc << '        })'
-        doc << '      }),'
-        doc << '      "MultiLineString": new ol.style.Style({'
-        doc << '        stroke: new ol.style.Stroke({'
-        doc << '          color: "blueviolet",'
-        doc << '          width: 3'
-        doc << '        })'
-        doc << '      })'
+        doc << '      }'
         doc << '    }'
-        doc << "    let files = [#{files.map { |file| "\"#{file}\"" }.join(', ')}]"
-        doc << '    let vectors = files.map(function(file) {'
+        doc << "    let sources = [#{files.zip(colors)
+                                          .map { |file, color| "{ file: \"#{file}\", color: \"#{color}\" }" }
+                                          .join(', ')}]"
+        doc << '    let vectors = sources.map(function(source) {'
         doc << '      return new ol.layer.Vector({'
         doc << '        source: new ol.source.Vector({'
         doc << '          format: function() {'
-        doc << '            if (file.endsWith(".gpx")) {'
+        doc << '            if (source.file.endsWith(".gpx")) {'
         doc << '              return new ol.format.GPX()'
-        doc << '            } else if (file.endsWith(".kml")) {'
+        doc << '            } else if (source.file.endsWith(".kml")) {'
         doc << '              return new ol.format.KML({'
         doc << '                extractStyles: false'
         doc << '              })'
@@ -151,10 +157,10 @@ module Natour
         doc << '              return null'
         doc << '            }'
         doc << '          }(),'
-        doc << '          url: file'
+        doc << '          url: source.file'
         doc << '        }),'
         doc << '        style: function(feature) {'
-        doc << '          return styles[feature.getGeometry().getType()]'
+        doc << '          return getStyles(source.color)[feature.getGeometry().getType()]'
         doc << '        }'
         doc << '      })'
         doc << '    })'
