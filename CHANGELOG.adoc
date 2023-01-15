@@ -6,6 +6,12 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 
 == Unreleased
 
+=== Fixed
+
+- Prevent orphaned section titles and table captions in PDF output.
++
+IMPORTANT: This is a breaking change for existing AsciiDoc files that are converted again. Apply the breakable option to tables containing species lists; otherwise the numbering of the tables will not be consecutive.
+
 == 0.9.0 - 2022-10-08
 
 === Added

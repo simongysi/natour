@@ -124,7 +124,7 @@ module Natour
             end
             cols = [1] + [5 * info.columns.size / columns.size] * columns.size
             doc << caption
-            doc << "[cols=\"#{cols.join(',')}\",options=header]"
+            doc << "[%breakable,cols=\"#{cols.join(',')}\",options=header]"
             doc << '|==='
             doc << "|Nr.|#{columns.map(&:header).join('|')}"
             species_list.each do |species|

@@ -9,6 +9,8 @@ font:
       bold_italic: dejavuserifcondensed-bold_italic.ttf
 base:
   font_family: DejaVu Serif Condensed
+heading:
+  min_height_after: auto
 footer:
   recto:
     left:
