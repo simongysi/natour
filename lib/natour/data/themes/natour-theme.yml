@@ -8,7 +8,7 @@ font:
       bold: dejavuserifcondensed-bold.ttf
       bold_italic: dejavuserifcondensed-bold_italic.ttf
 base:
-  font-family: DejaVu Serif Condensed
+  font_family: DejaVu Serif Condensed
 footer:
   recto:
     left:
