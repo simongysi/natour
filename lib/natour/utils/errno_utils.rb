@@ -3,7 +3,9 @@ module Natour
     module_function
 
     def split_message(error)
-      error.message.split(/ @ | - /, 3)
+      tokens = error.message.split(/ @ | - /, 3)
+      tokens.insert(1, *[nil] * (3 - tokens.size))
+      tokens
     end
   end
 end
