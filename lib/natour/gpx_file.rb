@@ -9,8 +9,15 @@ module Natour
       'xmlns:gpxtrkx' => 'http://www.garmin.com/xmlschemas/TrackStatsExtension/v1'
     }.freeze
 
+    attr_reader :types
+
     def initialize(filename)
       @doc = Nokogiri.XML(File.read(filename, mode: 'r:utf-8'))
+
+      @types = []
+      @types << :waypoint if @doc.at('/xmlns:gpx/xmlns:wpt', GPX_XMLNS)
+      @types << :route if @doc.at('/xmlns:gpx/xmlns:rte', GPX_XMLNS)
+      @types << :track if @doc.at('/xmlns:gpx/xmlns:trk', GPX_XMLNS)
 
       stats = @doc.at('/xmlns:gpx/xmlns:trk/xmlns:extensions/gpxtrkx:TrackStatsExtension', GPX_XMLNS)
       if stats
@@ -23,7 +30,7 @@ module Natour
       start_point = to_track_point(@doc.at('/xmlns:gpx/xmlns:trk/xmlns:trkseg[1]/xmlns:trkpt[1]', GPX_XMLNS))
       end_point = to_track_point(@doc.at('/xmlns:gpx/xmlns:trk/xmlns:trkseg[last()]/xmlns:trkpt[last()]', GPX_XMLNS))
 
-      super(filename, start_point.time&.to_date, ascent, descent, distance, duration, start_point, end_point)
+      super(filename, start_point&.time&.to_date, ascent, descent, distance, duration, start_point, end_point)
     end
 
     def to_gpx
@@ -33,6 +40,8 @@ module Natour
     private
 
     def to_track_point(trkpt)
+      return nil unless trkpt
+
       GPSTrackPoint.new(
         trkpt['lat'].to_f,
         trkpt['lon'].to_f,

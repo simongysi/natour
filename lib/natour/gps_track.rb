@@ -29,7 +29,8 @@ module Natour
       format = Pathname(filename).extname.to_s.delete_prefix('.').to_sym if format == :auto
       case format
       when :gpx
-        GPXFile.new(filename)
+        gpx_file = GPXFile.new(filename)
+        gpx_file if gpx_file.types.include?(:track)
       when :fit
         FITFile.new(filename)
       end

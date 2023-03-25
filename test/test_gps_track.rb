@@ -87,6 +87,12 @@ class TestGPSTrack < Minitest::Test
     )
   end
 
+  def test_load_gpx_file_with_only_waypoints
+    filename = "#{__dir__}/data/Wegpunkte_2022-04-30.gpx"
+    gps_track = GPSTrack.load_file(filename)
+    assert_nil(gps_track)
+  end
+
   def test_round_down
     gps_track = GPSTrack.new(
       'path/to/gps_track',

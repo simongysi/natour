@@ -51,6 +51,7 @@ module Natour
                                                     .join(',')
                        Pathname.glob("**/*.{#{track_pattern}}")
                                .map { |filename| GPSTrack.load_file(filename.to_s) }
+                               .compact
                                .sort_by { |gps_track| [gps_track.date, gps_track.path] }
                      end
 

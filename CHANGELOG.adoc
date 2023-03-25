@@ -8,6 +8,10 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 == Unreleased
 
+=== Fixed
+
+- Do not abort creating reports if GPX files do not contain tracks.
+
 == 0.10.0 - 2023-02-18
 
 === Fixed
