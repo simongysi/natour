@@ -126,40 +126,10 @@ class NatourCmd < Clamp::Command
 end
 
 config = Natour::Config.load_files([
+  "#{__dir__}/../.natour.yml",
   Pathname(Dir.home).join('.natour.yml'),
   Pathname(Dir.pwd).join('.natour.yml')
-], default: {
-  report: {
-    create: {
-      out_dir: nil,
-      out_file: nil,
-      overwrite: false,
-      track_formats: %i[gpx fit],
-      map: true,
-      map_layers: [],
-      adoc_author: nil
-    },
-    convert: {
-      out_dir: nil,
-      out_file: nil,
-      overwrite: false,
-      backend: :pdf,
-      draft: false,
-      draft_backend: nil,
-      image_maxdim: 1800
-    }
-  },
-  map: {
-    create: {
-      out_dir: nil,
-      out_file: nil,
-      overwrite: false,
-      gps_colors: [],
-      map_layers: [],
-      image_size: [1200, 900]
-    }
-  }
-})
+])
 
 NatourCmd.run(
   Pathname($PROGRAM_NAME).basename,

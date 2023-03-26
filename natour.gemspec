@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.metadata    = { 'bug_tracker_uri' => 'https://github.com/simongysi/natour/issues',
                        'changelog_uri' => 'https://github.com/simongysi/natour/blob/main/CHANGELOG.adoc',
                        'source_code_uri' => 'https://github.com/simongysi/natour' }
-  spec.files       = ['README.adoc', 'CHANGELOG.adoc', 'LICENSE'] +
+  spec.files       = ['.natour.yml', 'CHANGELOG.adoc', 'LICENSE', 'README.adoc'] +
                      Pathname.glob('lib/**/*').reject(&:directory?).map(&:to_s)
   spec.executables = Pathname.glob('bin/**/*').reject(&:directory?).map(&:basename).map(&:to_s)
   spec.required_ruby_version = '>= 2.6'
