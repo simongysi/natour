@@ -10,6 +10,7 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 === Changed
 
+- Specify files to load for a configuration instead of a file and directories.
 - The configuration files must now be named `.natour.yml` (prefixed with a dot).
 
 === Fixed

@@ -7,14 +7,11 @@ class TestConfig < Minitest::Test
   include Minitest
   include Natour
 
-  def test_load_file
-    config = Config.load_file(
-      'config.yml',
-      dirs: [
-        "#{__dir__}/data/config/user",
-        "#{__dir__}/data/config/local"
-      ]
-    )
+  def test_load_files
+    config = Config.load_files([
+      "#{__dir__}/data/config/user_config.yml",
+      "#{__dir__}/data/config/local_config.yml"
+    ])
     assert_equal({
       report: {
         create: {
@@ -26,23 +23,19 @@ class TestConfig < Minitest::Test
     }, config)
   end
 
-  def test_load_file_with_default
-    config = Config.load_file(
-      'config.yml',
-      default: {
-        report: {
-          create: {
-            out_dir: '~/Documents',
-            out_file: 'report.adoc',
-            track_formats: %i[gpx fit]
-          }
+  def test_load_files_with_default
+    config = Config.load_files([
+      "#{__dir__}/data/config/user_config.yml",
+      "#{__dir__}/data/config/local_config.yml"
+    ], default: {
+      report: {
+        create: {
+          out_dir: '~/Documents',
+          out_file: 'report.adoc',
+          track_formats: %i[gpx fit]
         }
-      },
-      dirs: [
-        "#{__dir__}/data/config/user",
-        "#{__dir__}/data/config/local"
-      ]
-    )
+      }
+    })
     assert_equal({
       report: {
         create: {
@@ -55,14 +48,11 @@ class TestConfig < Minitest::Test
     }, config)
   end
 
-  def test_load_file_priorities
-    config = Config.load_file(
-      'config.yml',
-      dirs: [
-        "#{__dir__}/data/config/local",
-        "#{__dir__}/data/config/user"
-      ]
-    )
+  def test_load_files_priorities
+    config = Config.load_files([
+      "#{__dir__}/data/config/local_config.yml",
+      "#{__dir__}/data/config/user_config.yml"
+    ])
     assert_equal({
       report: {
         create: {
@@ -75,32 +65,16 @@ class TestConfig < Minitest::Test
   end
 
   def test_file_not_existing
-    config = Config.load_file(
-      'config-not-existing.yml',
-      dirs: [
-        "#{__dir__}/data/config/user"
-      ]
-    )
-    assert_equal({}, config)
-  end
-
-  def test_dir_not_existing
-    config = Config.load_file(
-      'config.yml',
-      dirs: [
-        "#{__dir__}/data/config/not-existing"
-      ]
-    )
+    config = Config.load_files([
+      "#{__dir__}/data/config/user_config_not_existing.yml"
+    ])
     assert_equal({}, config)
   end
 
   def test_empty_file
-    config = Config.load_file(
-      'empty_config.yml',
-      dirs: [
-        "#{__dir__}/data/config"
-      ]
-    )
+    config = Config.load_files([
+      "#{__dir__}/data/config/empty_config.yml"
+    ])
     assert_equal({}, config)
   end
 end
