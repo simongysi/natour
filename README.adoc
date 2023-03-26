@@ -90,7 +90,7 @@ NOTE: Use `natour --help` to get more information.
 
 === Configuration
 
-The configuration is built by loading https://yaml.org/[YAML^] files in hierarchical order. The files must be named `natour.yml` and are loaded first from the home directory of the current user and then from the current working directory. The values of the previously loaded files are overwritten by the values of the files loaded later. The values are stored internally in nested, dictionary-like collections (Ruby `Hash`), where the structure follows to the command line interface. All keys are of type Ruby `Symbol` and correspond to the commands and options, with middle hyphens replaced by underscores, leading hyphens removed, and without the `no-` prefix for boolean switches. The following configuration file shows all entries and their default values.
+The configuration is built by loading https://yaml.org/[YAML^] files in hierarchical order. The files must be named `.natour.yml` and are loaded first from the home directory of the current user and then from the current working directory. The values of the previously loaded files are overwritten by the values of the files loaded later. The values are stored internally in nested, dictionary-like collections (Ruby `Hash`), where the structure follows to the command line interface. All keys are of type Ruby `Symbol` and correspond to the commands and options, with middle hyphens replaced by underscores, leading hyphens removed, and without the `no-` prefix for boolean switches. The following configuration file shows all entries and their default values.
 
 [source,yml]
 ----

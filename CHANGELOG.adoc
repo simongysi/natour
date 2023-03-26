@@ -8,6 +8,10 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 == Unreleased
 
+=== Changed
+
+- The configuration files must now be named `.natour.yml` (prefixed with a dot).
+
 === Fixed
 
 - Do not abort creating reports if GPX files do not contain tracks.

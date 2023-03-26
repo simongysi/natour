@@ -126,7 +126,7 @@ class NatourCmd < Clamp::Command
 end
 
 config = Natour::Config.load_file(
-  Pathname($PROGRAM_NAME).basename.sub_ext('.yml'),
+  '.natour.yml',
   default: {
     report: {
       create: {
