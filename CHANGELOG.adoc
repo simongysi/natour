@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning^].
 
+IMPORTANT: As per Semantic Versioning, the major version zero is for initial development and anything may change at any time.
+
 == Unreleased
 
 == 0.10.0 - 2023-02-18
@@ -11,8 +13,6 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 === Fixed
 
 - Prevent orphaned section titles and table captions in PDF output.
-+
-IMPORTANT: This is a breaking change for existing AsciiDoc files that are converted again. Apply the breakable option to tables containing species lists; otherwise the numbering of the tables will not be consecutive.
 
 == 0.9.0 - 2022-10-08
 
@@ -39,21 +39,11 @@ IMPORTANT: This is a breaking change for existing AsciiDoc files that are conver
 === Changed
 
 - Rename arguments of `Natour::MapGeoAdmin.save_image`, i.e. `tracks` to `gps_files`, `layers` to `map_layers` and `size` to `image_size`.
-+
-IMPORTANT: This is a breaking change.
 - Improve the error reporting on the command line interface in case of file errors.
 - Rework the configuration; the structure and naming follows the command line interface and the keys are of type Ruby Symbol. For details, see the README file.
-+
-IMPORTANT: This is a breaking change. Adapt the configuration file accordingly.
 - Rework the command line interface. Use `natour --help` to get more information.
-+
-IMPORTANT: This is a breaking change. Adapt the commands accordingly.
 - Change `backend` and `draft_backend` arguments of `Natour::convert_report` to symbols.
-+
-IMPORTANT: This is a breaking change. Adapt the configuration file accordingly.
 - Rename `Natour::create` to `Natour::create_reports` and `Natour::convert` to `Natour::convert_report`.
-+
-IMPORTANT: This is a breaking change.
 
 === Fixed
 
@@ -110,8 +100,6 @@ IMPORTANT: This is a breaking change.
 === Removed
 
 - Remove redundant method `Natour::Image.portrait?`.
-+
-IMPORTANT: This is a breaking change. Use `Natour::Image.landscape?` instead.
 
 == 0.3.0 - 2021-03-07
 
@@ -136,8 +124,6 @@ IMPORTANT: This is a breaking change. Use `Natour::Image.landscape?` instead.
 === Changed
 
 - Rename `Natour::SpeciesList.name` to `Natour::SpeciesList.title`.
-+
-IMPORTANT: This is a breaking change.
 - Return an empty array from `Natour::SpeciesList.load_file` if the format is unknown.
 - Change the format of the start time in the AsciiDoc output from _12:30_ to _12:30 Uhr_.
 - Change the format of the duration in the AsciiDoc output from _1h30_ to _1:30 h_.
