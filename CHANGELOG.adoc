@@ -8,6 +8,8 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 == Unreleased
 
+== 0.11.0 - 2023-04-15
+
 === Changed
 
 - Specify files to load for a configuration instead of a file and directories.
