@@ -94,7 +94,34 @@ The configuration is built by loading https://yaml.org/[YAML^] files in hierarch
 
 [source,yml]
 ----
-include::.natour.yml[]
+---
+:report:
+  :create:
+    :out_dir: null
+    :out_file: null
+    :overwrite: false
+    :track_formats:
+      - :gpx
+      - :fit
+    :map: true
+    :map_layers: []
+    :adoc_author: null
+  :convert:
+    :out_dir: null
+    :out_file: null
+    :overwrite: false
+    :backend: :pdf
+    :draft: false
+    :draft_backend: null
+    :image_maxdim: 1800
+:map:
+  :create:
+    :out_dir: null
+    :out_file: null
+    :overwrite: false
+    :gps_colors: []
+    :map_layers: []
+    :image_size: [1200, 900]
 ----
 
 How to restrict GPS tracks to the FIT format (see https://developer.garmin.com/fit/[FIT SDK^]) and add additional map layers (see https://api3.geo.admin.ch/api/faq/index.html#which-layers-are-available[API FAQ - GeoAdmin API 3.0 documentation^]) is shown in the example below.
