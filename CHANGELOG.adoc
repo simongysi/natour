@@ -37,7 +37,7 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 === Changed
 
-- Omit empty columns of species lists in AsciiDoc output.
+- Omit empty columns of species lists in the AsciiDoc output.
 
 === Fixed
 
