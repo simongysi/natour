@@ -10,6 +10,7 @@
     :map: true
     :map_layers: []
     :adoc_author: null
+    :short_species_names: false
   :convert:
     :out_dir: null
     :out_file: null

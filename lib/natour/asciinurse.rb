@@ -4,7 +4,7 @@ require 'pathname'
 
 module Natour
   module Asciinurse
-    def save_adoc(filename, overwrite: false, author: nil)
+    def save_adoc(filename, overwrite: false, author: nil, short_species_names: false)
       dir = Pathname(filename).dirname
       FileUtils.mkdir_p(dir)
       mode = File::WRONLY | File::CREAT | File::TRUNC
@@ -14,12 +14,13 @@ module Natour
           doc_root: Pathname(path).realpath
                                   .relative_path_from(dir.realpath)
                                   .to_s.force_encoding('utf-8'),
-          author: author
+          author: author,
+          short_species_names: short_species_names
         ))
       end
     end
 
-    def to_adoc(doc_root: '.', author: nil)
+    def to_adoc(doc_root: '.', author: nil, short_species_names: false)
       distance = ->(gps_track) { "#{gps_track.distance / 1000} km" if gps_track&.distance }
       ascent = ->(gps_track) { "#{gps_track.ascent} m" if gps_track&.ascent }
       descent = ->(gps_track) { "#{gps_track.descent} m" if gps_track&.descent }
@@ -98,16 +99,19 @@ module Natour
             group: :plants,
             title: 'Pflanzenarten',
             columns: [
-              OpenStruct.new(header: 'Wissenschaftlicher Name', accessor: :name),
-              OpenStruct.new(header: 'Deutscher Name', accessor: :name_de)
+              OpenStruct.new(
+                header: 'Wissenschaftlicher Name',
+                accessor: ->(species) { short_species_names ? BotanicalNameUtils.parse(species.name) : species.name }
+              ),
+              OpenStruct.new(header: 'Deutscher Name', accessor: ->(species) { species.name_de })
             ]
           ),
           OpenStruct.new(
             group: :birds,
             title: 'Vogelarten',
             columns: [
-              OpenStruct.new(header: 'Deutscher Name', accessor: :name_de),
-              OpenStruct.new(header: 'Wissenschaftlicher Name', accessor: :name)
+              OpenStruct.new(header: 'Deutscher Name', accessor: ->(species) { species.name_de }),
+              OpenStruct.new(header: 'Wissenschaftlicher Name', accessor: ->(species) { species.name })
             ]
           )
         ].each do |info|
@@ -120,7 +124,7 @@ module Natour
             caption = '.Tabelle {counter:species_lists}'
             caption << ": #{species_list.description}" if species_list.description
             columns = info.columns.select do |column|
-              species_list.any? { |species| !species.public_send(column.accessor).nil? }
+              species_list.any? { |species| !column.accessor.call(species).nil? }
             end
             cols = [1] + [5 * info.columns.size / columns.size] * columns.size
             doc << caption
@@ -129,7 +133,7 @@ module Natour
             doc << "|Nr.|#{columns.map(&:header).join('|')}"
             species_list.each do |species|
               doc <<
-                "|{counter:species_list#{index}}|#{columns.map { |column| species.public_send(column.accessor) }
+                "|{counter:species_list#{index}}|#{columns.map { |column| column.accessor.call(species) }
                                                           .join('|')}"
             end
             doc << '|==='

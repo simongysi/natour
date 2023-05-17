@@ -90,9 +90,9 @@ class TestSpeciesList < Minitest::Test
     assert_nil(species_list.description)
     assert_equal(3, species_list.count)
     assert_equal([
-      Species.new('Crepis aurea', 'Gold-Pippau'),
-      Species.new('Crepis biennis', 'Wiesen-Pippau'),
-      Species.new('Crepis capillaris', 'Kleinköpfiger Pippau')
+      Species.new('Crepis aurea (L.) Cass.', 'Gold-Pippau'),
+      Species.new('Crepis biennis L.', 'Wiesen-Pippau'),
+      Species.new('Crepis capillaris Wallr.', 'Kleinköpfiger Pippau')
     ], species_list.to_a)
   end
 
@@ -110,8 +110,8 @@ class TestSpeciesList < Minitest::Test
     assert_nil(species_list.description)
     assert_equal(3, species_list.count)
     assert_equal([
-      Species.new('Abies alba', 'Tanne'),
-      Species.new('Empetrum nigrum subsp. hermaphroditum', 'Zwittrige Krähenbeere'),
+      Species.new('Abies alba Mill.', 'Tanne'),
+      Species.new('Empetrum nigrum subsp. hermaphroditum (Hagerup) Böcher', 'Zwittrige Krähenbeere'),
       Species.new('Galium mollugo aggr.', 'Wiesen-Labkraut')
     ], species_list.to_a)
   end
@@ -130,9 +130,9 @@ class TestSpeciesList < Minitest::Test
     assert_nil(species_list.description)
     assert_equal(3, species_list.count)
     assert_equal([
-      Species.new('Crepis aurea', 'Gold-Pippau'),
-      Species.new('Crepis biennis', 'Wiesen-Pippau'),
-      Species.new('Crepis capillaris', 'Kleinköpfiger Pippau')
+      Species.new('Crepis aurea (L.) Cass.', 'Gold-Pippau'),
+      Species.new('Crepis biennis L.', 'Wiesen-Pippau'),
+      Species.new('Crepis capillaris Wallr.', 'Kleinköpfiger Pippau')
     ], species_list.to_a)
 
     species_list2 = species_lists[1]
@@ -144,9 +144,9 @@ class TestSpeciesList < Minitest::Test
     assert_equal('Vertiefung Poaceae', species_list2.description)
     assert_equal(3, species_list2.count)
     assert_equal([
-      Species.new('Briza media', 'Mittleres Zittergras'),
-      Species.new('Deschampsia cespitosa', 'Rasen-Schmiele'),
-      Species.new('Festuca rubra', 'Rot-Schwingel')
+      Species.new('Briza media L.', 'Mittleres Zittergras'),
+      Species.new('Deschampsia cespitosa (L.) P. Beauv.', 'Rasen-Schmiele'),
+      Species.new('Festuca rubra L.', 'Rot-Schwingel')
     ], species_list2.to_a)
 
     species_list3 = species_lists[2]
@@ -158,9 +158,9 @@ class TestSpeciesList < Minitest::Test
     assert_equal('Vertiefung Cyperaceae', species_list3.description)
     assert_equal(3, species_list3.count)
     assert_equal([
-      Species.new('Carex flava', 'Gewöhnliche Gelbe Segge'),
-      Species.new('Carex leporina', 'Hasenpfoten-Segge'),
-      Species.new('Carex ornithopoda', 'Vogelfuss-Segge')
+      Species.new('Carex flava L.', 'Gewöhnliche Gelbe Segge'),
+      Species.new('Carex leporina L.', 'Hasenpfoten-Segge'),
+      Species.new('Carex ornithopoda Willd.', 'Vogelfuss-Segge')
     ], species_list3.to_a)
   end
 
@@ -178,9 +178,9 @@ class TestSpeciesList < Minitest::Test
     assert_nil(species_list.description)
     assert_equal(3, species_list.count)
     assert_equal([
-      Species.new('Anagallis arvensis', nil),
-      Species.new('Daphne laureola', nil),
-      Species.new('Primula veris', nil)
+      Species.new('Anagallis arvensis L.', nil),
+      Species.new('Daphne laureola L.', nil),
+      Species.new('Primula veris L.', nil)
     ], species_list.to_a)
   end
 
@@ -198,11 +198,11 @@ class TestSpeciesList < Minitest::Test
     assert_nil(species_list.description)
     assert_equal(5, species_list.count)
     assert_equal([
-      Species.new('Hypochaeris uniflora', nil),
-      Species.new('Juncus jacquinii', nil),
-      Species.new('Juncus trifidus', nil),
-      Species.new('Juncus triglumis', nil),
-      Species.new('Ligusticum mutellinoides', nil)
+      Species.new('Hypochaeris uniflora Vill.', nil),
+      Species.new('Juncus jacquinii L.', nil),
+      Species.new('Juncus trifidus L.', nil),
+      Species.new('Juncus triglumis L.', nil),
+      Species.new('Ligusticum mutellinoides Vill.', nil)
     ], species_list.to_a)
   end
 end

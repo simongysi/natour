@@ -21,6 +21,7 @@ class NatourCmd < Clamp::Command
       option(%W[--\[no-\]map], :flag, 'Create map images')
       option(%w[--map-layers], 'LAYERS', 'Add additional layers to map images') { |s| s.split(',') }
       option(%w[--adoc-author], 'AUTHOR', 'AsciiDoc author (name <email>[; name2 <email2>...])')
+      option(%W[--\[no-\]short-species-names], :flag, 'Use short species names (botany only)')
       parameter('PATH', 'Path to directory')
 
       def execute
@@ -33,7 +34,9 @@ class NatourCmd < Clamp::Command
           track_formats: track_formats || config[:track_formats],
           create_map: Natour::BooleanUtils.to_boolean(map?, default_value: config[:map]),
           map_layers: map_layers || config[:map_layers],
-          adoc_author: adoc_author || config[:adoc_author]
+          adoc_author: adoc_author || config[:adoc_author],
+          short_species_names: Natour::BooleanUtils.to_boolean(short_species_names?,
+                                                               default_value: config[:short_species_names])
         )
       rescue Errno::EEXIST, Errno::ENOENT, Errno::EACCES, Errno::EISDIR, Errno::EINVAL => e
         message, _, path = Natour::ErrnoUtils.split_message(e)

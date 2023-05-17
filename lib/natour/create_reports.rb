@@ -4,7 +4,8 @@ module Natour
   module_function
 
   def create_reports(dir, out_dir: nil, out_file: nil, overwrite: false,
-                     track_formats: %i[gpx fit], create_map: true, map_layers: [], adoc_author: nil)
+                     track_formats: %i[gpx fit], create_map: true, map_layers: [],
+                     adoc_author: nil, short_species_names: false)
     out_dir = Pathname(out_dir || dir)
     out_file = Pathname(out_file || "#{Pathname(dir).realpath.basename}.adoc")
     reports = Report.load_directory(
@@ -16,7 +17,7 @@ module Natour
                  else
                    out_dir.join("#{out_file.basename('.*')} (#{index})#{out_file.extname}")
                  end
-      report.save_adoc(filename, overwrite: overwrite, author: adoc_author)
+      report.save_adoc(filename, overwrite: overwrite, author: adoc_author, short_species_names: short_species_names)
       filename.to_s
     end
   end
