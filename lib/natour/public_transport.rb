@@ -16,7 +16,7 @@ module Natour
       return unless response.is_a?(Net::HTTPSuccess)
 
       stations = JSON.parse(response.body, symbolize_names: true)
-      stations.reject! { |station| station[:dist] > radius }
+      stations.reject! { |station| !station.key?(:dist) || station[:dist] > radius }
       station_types = %w[
         sl-icon-type-train
         sl-icon-type-strain

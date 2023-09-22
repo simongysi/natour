@@ -25,8 +25,14 @@ class TestPublicTransport < Minitest::Test
     )
   end
 
-  def test_search_no_station
+  def test_search_no_suitable_station
     position = [46.81122, 8.91464]
+    station = PublicTransport.search_station(position)
+    assert_nil(station)
+  end
+
+  def test_search_no_suitable_station_missing_distance
+    position = [51.2290123478, -3.8268142194]
     station = PublicTransport.search_station(position)
     assert_nil(station)
   end

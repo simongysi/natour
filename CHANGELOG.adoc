@@ -16,6 +16,10 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 - Do not use shorthand syntax for the breakable option in the AsciiDoc output.
 
+=== Fixed
+
+- Fix search of public transport stations if distance is missing (e.g. if the coordinates are outside of Switzerland).
+
 == 0.11.0 - 2023-04-15
 
 === Changed
