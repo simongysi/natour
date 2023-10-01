@@ -124,7 +124,7 @@ module Natour
             caption = '.Tabelle {counter:species_lists}'
             caption << ": #{species_list.description}" if species_list.description
             columns = info.columns.select do |column|
-              species_list.any? { |species| !column.accessor.call(species).nil? }
+              species_list.count.zero? || species_list.any? { |species| !column.accessor.call(species).nil? }
             end
             cols = [1] + [5 * info.columns.size / columns.size] * columns.size
             doc << caption
