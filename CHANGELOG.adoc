@@ -8,6 +8,8 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 == Unreleased
 
+== 0.12.0 - 2023-11-22
+
 === Added
 
 - Add command line option to use short species names in the AsciiDoc output. The species names are truncated by removing the authority (botany only).
