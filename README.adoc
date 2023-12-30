@@ -1,18 +1,22 @@
 = natour
+Simon Gysi <simon.gysi@gmail.com>
+:pdf-page-mode: none
+:toc:
+:toc-title!:
 
 This https://rubygems.org/gems/natour[RubyGem^] provides an application and a library to document nature activities.
 
 == Installation
 
-. Install the <<Prerequisites>>
-. Install the gem
-+
-NOTE: Use `sudo` on Ubuntu
+. Install the <<Prerequisites>>.
+. Install the gem:
 +
 [source,shell]
 ----
 gem install natour
 ----
++
+NOTE: Use `sudo` on Ubuntu.
 
 === Prerequisites
 
@@ -20,35 +24,35 @@ Install the required components by following the instructions below. Please read
 
 ==== Windows
 
-. Download and install the latest version from https://rubyinstaller.org/[RubyInstaller for Windows^]
-. Download and install the latest version from https://www.google.com/chrome/[Google Chrome-Webbroser^]
-. Add `BROWSER_PATH=path\to\chrome.exe` to the environment variables
-. Log off Windows and back on again to ensure the environment variable takes effect
+. Download and install the latest version from https://rubyinstaller.org/[RubyInstaller for Windows^].
+. Download and install the latest version from https://www.google.com/chrome/[Google Chrome-Webbroser^].
+. Add `BROWSER_PATH=path\to\chrome.exe` to the environment variables.
+. Log off Windows and back on again to ensure the environment variable takes effect.
 
 ==== Ubuntu
 
-. Install https://www.ruby-lang.org/[Ruby^]
+. Install https://www.ruby-lang.org/[Ruby^]:
 +
 [source,shell]
 ----
 sudo apt install ruby
 ----
 
-. Install https://nokogiri.org/[Nokogiri^] dependencies
+. Install https://nokogiri.org/[Nokogiri^] dependencies:
 +
 [source,shell]
 ----
 sudo apt install build-essential patch ruby-dev zlib1g-dev liblzma-dev
 ----
 
-. Install https://libvips.github.io/libvips/[libvips^]
+. Install https://libvips.github.io/libvips/[libvips^]:
 +
 [source,shell]
 ----
 sudo apt install libvips
 ----
 
-. Install https://www.google.com/chrome/[Google Chrome-Webbroser^]
+. Install https://www.google.com/chrome/[Google Chrome-Webbroser^]:
 +
 [source,shell]
 ----
@@ -92,7 +96,7 @@ NOTE: Use `natour --help` to get more information.
 
 The configuration is built by loading https://yaml.org/[YAML^] files in hierarchical order. The files must be named `.natour.yml` and are loaded first from the home directory of the current user and then from the current working directory. The values of the previously loaded files are overwritten by the values of the files loaded later. The values are stored internally in nested, dictionary-like collections (Ruby `Hash`), where the structure follows to the command line interface. All keys are of type Ruby `Symbol` and correspond to the commands and options, with middle hyphens replaced by underscores, leading hyphens removed, and without the `no-` prefix for boolean switches. The following configuration file shows all entries and their default values.
 
-[source,yml]
+[source,yaml]
 ----
 ---
 :report:
@@ -127,7 +131,7 @@ The configuration is built by loading https://yaml.org/[YAML^] files in hierarch
 
 How to restrict GPS tracks to the FIT format (see https://developer.garmin.com/fit/[FIT SDK^]) and add additional map layers (see https://api3.geo.admin.ch/api/faq/index.html#which-layers-are-available[API FAQ - GeoAdmin API 3.0 documentation^]) is shown in the example below.
 
-[source,yml]
+[source,yaml]
 ----
 ---
 :report:
@@ -157,20 +161,41 @@ require 'natour'
 Natour::convert_report('path/to/dir/report.adoc')
 ----
 
+== Development
+
+=== Running
+
+To run the application from the source code, the `lib` directory must be added to `$LOAD_PATH`.
+
+E.{nbsp}g. show the application version.
+[source,shell]
+----
+ruby -Ilib ./bin/natour --version
+----
+
 === Testing
 
-Execute the following command to run the tests. Add `-Ilib` to the command to run the tests against the library sources instead of the installed gem.
+Execute the following command to run the tests.
 
 NOTE: Some tests require an Internet connection.
 
 [source,shell]
 ----
-ruby ./test/test.rb
+ruby -Ilib ./test/test.rb
 ----
+
+=== Formatting and linting
 
 Run the following command to check the style and formatting by https://rubocop.org/[RuboCop^].
 
 [source,shell]
 ----
 rubocop
+----
+
+=== Building
+
+[source,shell]
+----
+gem build ./natour.gemspec
 ----

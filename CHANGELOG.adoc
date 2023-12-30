@@ -1,4 +1,5 @@
 = natour Changelog
+Simon Gysi <simon.gysi@gmail.com>
 
 All notable changes to this project will be documented in this file.
 
