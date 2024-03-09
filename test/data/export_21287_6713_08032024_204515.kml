@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://earth.google.com/kml/2.2">
+<Document>
+<name>https://www.ornitho.ch</name>
+<StyleMap id="map50">
+<Pair>
+<key>normal</key>
+<styleUrl>#map50n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map50h</styleUrl>
+</Pair>
+</StyleMap>
+<StyleMap id="map100">
+<Pair>
+<key>normal</key>
+<styleUrl>#map100n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map100h</styleUrl>
+</Pair>
+</StyleMap>
+<StyleMap id="map200">
+<Pair>
+<key>normal</key>
+<styleUrl>#map200n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map200h</styleUrl>
+</Pair>
+</StyleMap>
+<StyleMap id="map400">
+<Pair>
+<key>normal</key>
+<styleUrl>#map400n</styleUrl>
+</Pair>
+<Pair>
+<key>highlight</key>
+<styleUrl>#map400h</styleUrl>
+</Pair>
+</StyleMap>
+<Style id="map50n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map50n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map50h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map50h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map100n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map100n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map100h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map100h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map200n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map200n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map200h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map200h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map400n">
+<LabelStyle><color>00000000</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map400n.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Style id="map400h">
+<LabelStyle><color>ffffffff</color></LabelStyle>
+<IconStyle><Icon><href>https://cdnfiles1.biolovision.net/common/images/google/map400h.png</href></Icon></IconStyle>
+<BalloonStyle><bgColor>ffffffff</bgColor><text><![CDATA[<b><font color="#000000" size="+1">$[name]</font></b><br/><br/>$[description]<br/><br/><a href="https://www.ornitho.ch">www.ornitho.ch</a><br/><br/>]]></text></BalloonStyle>
+</Style>
+<Folder>
+<name>export</name>
+<visibility>0</visibility>
+<open>1</open>
+<Folder>
+<name><![CDATA[Freitag, 8. März 2024]]></name>
+<open>1</open>
+<Folder>
+<name><![CDATA[Gippinger Grien / Leuggern (AG)]]></name>
+<open>1</open>
+<Placemark><name><![CDATA[ Elster]]></name>
+<description><![CDATA[Freitag, 8. März 2024<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Elster&lt;/b&gt; &lt;span class=&quot;sci_name&quot;&gt;(Pica pica)&lt;/span&gt;<br/><br/><b>Ort</b> : <br/>Gippinger Grien / Leuggern (AG) - Schweiz [658800 / 271800]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>× Ind.<br/>Höhe : 324<br/>ID ornitho.ch : <a href="https://www.ornitho.ch/index.php?m_id=54&id=30107009">30107009</a><br/><br/>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.216895,47.597264,324</coordinates>
+</Point>
+</Placemark><Placemark><name><![CDATA[ Rabenkrähe]]></name>
+<description><![CDATA[Freitag, 8. März 2024<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Rabenkrähe&lt;/b&gt; &lt;span class=&quot;sci_name&quot;&gt;(Corvus corone)&lt;/span&gt;<br/><br/><b>Ort</b> : <br/>Gippinger Grien / Leuggern (AG) - Schweiz [658800 / 271800]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>× Ind.<br/>Höhe : 316<br/>ID ornitho.ch : <a href="https://www.ornitho.ch/index.php?m_id=54&id=30107042">30107042</a><br/><br/>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.215811,47.593839,316</coordinates>
+</Point>
+</Placemark><Placemark><name><![CDATA[ Buchfink]]></name>
+<description><![CDATA[Freitag, 8. März 2024<br/><br/><b>Tierart</b> : <br/>&lt;b&gt;Buchfink&lt;/b&gt; &lt;span class=&quot;sci_name&quot;&gt;(Fringilla coelebs)&lt;/span&gt;<br/><br/><b>Ort</b> : <br/>Gippinger Grien / Leuggern (AG) - Schweiz [658800 / 271800]<br/><br/><b>Beobachter</b> : <br/><u>Simon Gysi</u><br/>× Ind.<br/>Höhe : 315<br/>ID ornitho.ch : <a href="https://www.ornitho.ch/index.php?m_id=54&id=30107040">30107040</a><br/><br/>]]></description><styleUrl>#map50</styleUrl>
+<Point>
+<coordinates>8.216702,47.595333,315</coordinates>
+</Point>
+</Placemark></Folder>
+</Folder>
+</Folder>
+</Document></kml>

@@ -1,5 +1,6 @@
 = natour Changelog
 Simon Gysi <simon.gysi@gmail.com>
+:url-ornito: https://www.ornitho.ch/[ornitho.ch^]
 
 All notable changes to this project will be documented in this file.
 
@@ -8,6 +9,10 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog^], 
 IMPORTANT: As per Semantic Versioning, the major version zero is for initial development and anything may change at any time.
 
 == Unreleased
+
+=== Added
+
+- Support species lists from {url-ornito} based on KML version 2.2.
 
 == 0.12.0 - 2023-11-22
 
@@ -145,7 +150,7 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 === Added
 
 - Add this gem's name to the footer of the PDF output.
-- Support species lists from https://www.ornitho.ch/[ornitho.ch^] (KML format only).
+- Support species lists from {url-ornito} (KML format only).
 - Classify species lists by taxonomic groups (i.e. `Natour::SpeciesList.group`).
 
 === Changed

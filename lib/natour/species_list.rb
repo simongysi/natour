@@ -22,7 +22,7 @@ module Natour
     end
 
     def self.load_file(filename)
-      block = IO.binread(filename, 128)
+      block = IO.binread(filename, 256)
       header = if block.unpack('CC') == [0xff, 0xfe]
                  block[2..].force_encoding('utf-16le').encode('utf-8')
                elsif block.unpack('CCC') == [0xef, 0xbb, 0xbf]
@@ -53,7 +53,9 @@ module Natour
         name = folder.at('./xmlns:name').text
         items = folder.xpath('./xmlns:Placemark/xmlns:description')
                       .map(&:text)
-                      .map { |description| Species.new(*description.scan(/&gt;([^&(]+)&lt;/).flatten.reverse) }
+                      .map do |description|
+                        Species.new(*description.scan(%r{b&gt;(.*?)&lt;/b&gt;.*?&gt;\(?(.*?)\)?&lt;}).flatten.reverse)
+                      end
                       .sort_by(&:name_de).uniq
         [SpeciesList.new(filename, date, :ornitho_ch, :birds, name, nil, items)]
       when /^(Favoriten|NUMMER_FLORA)/

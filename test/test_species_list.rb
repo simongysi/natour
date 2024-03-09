@@ -56,7 +56,7 @@ class TestSpeciesList < Minitest::Test
     ], species_list.to_a)
   end
 
-  def test_load_file_ornitho_ch
+  def test_load_file_ornitho_ch_kml21
     filename = "#{__dir__}/data/export_29122020_152036.kml"
     species_lists = SpeciesList.load_file(filename)
     assert_equal(1, species_lists.count)
@@ -73,6 +73,26 @@ class TestSpeciesList < Minitest::Test
       Species.new('Spatula clypeata', 'Löffelente'),
       Species.new('Falco tinnunculus', 'Turmfalke'),
       Species.new('Troglodytes troglodytes', 'Zaunkönig')
+    ], species_list.to_a)
+  end
+
+  def test_load_file_ornitho_ch_kml22
+    filename = "#{__dir__}/data/export_21287_6713_08032024_204515.kml"
+    species_lists = SpeciesList.load_file(filename)
+    assert_equal(1, species_lists.count)
+
+    species_list = species_lists.first
+    assert_equal(filename, species_list.path)
+    assert_nil(species_list.date)
+    assert_equal(:ornitho_ch, species_list.type)
+    assert_equal(:birds, species_list.group)
+    assert_equal('Gippinger Grien / Leuggern (AG)', species_list.title)
+    assert_nil(species_list.description)
+    assert_equal(3, species_list.count)
+    assert_equal([
+      Species.new('Fringilla coelebs', 'Buchfink'),
+      Species.new('Pica pica', 'Elster'),
+      Species.new('Corvus corone', 'Rabenkrähe')
     ], species_list.to_a)
   end
 
