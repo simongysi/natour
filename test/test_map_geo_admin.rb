@@ -19,7 +19,7 @@ class TestMapGeoAdmin < Minitest::Test
           ]
         )
         assert(filename.file?)
-        assert(filename.size > 1260000)
+        assert_operator filename.size, :>, 1260000
       end
     end
   end
@@ -36,7 +36,7 @@ class TestMapGeoAdmin < Minitest::Test
           ]
         )
         assert(filename.file?)
-        assert(filename.size > 1167000)
+        assert_operator filename.size, :>, 1167000
       end
     end
   end
@@ -56,7 +56,7 @@ class TestMapGeoAdmin < Minitest::Test
           ]
         )
         assert(filename.file?)
-        assert(filename.size > 1275000)
+        assert_operator filename.size, :>, 1275000
       end
     end
   end
