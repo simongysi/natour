@@ -14,6 +14,10 @@ IMPORTANT: As per Semantic Versioning, the major version zero is for initial dev
 
 - Support species lists from {url-ornito} based on KML version 2.2.
 
+=== Fixed
+
+- Fix sorting of GPS tracks without date.
+
 == 0.12.0 - 2023-11-22
 
 === Added

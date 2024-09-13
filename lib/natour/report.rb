@@ -52,7 +52,7 @@ module Natour
                        Pathname.glob("**/*.{#{track_pattern}}")
                                .map { |filename| GPSTrack.load_file(filename.to_s) }
                                .compact
-                               .sort_by { |gps_track| [gps_track.date, gps_track.path] }
+                               .sort_by { |gps_track| [gps_track.date ? 0 : 1, gps_track.date, gps_track.path] }
                      end
 
         if create_map
