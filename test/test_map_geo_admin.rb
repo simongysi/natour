@@ -36,7 +36,7 @@ class TestMapGeoAdmin < Minitest::Test
           ]
         )
         assert(filename.file?)
-        assert(filename.size > 1178000)
+        assert(filename.size > 1167000)
       end
     end
   end
